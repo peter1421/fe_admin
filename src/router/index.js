@@ -110,6 +110,12 @@ export const asyncRoutes = [
         meta: { title: '客戶端首頁', icon: 'user', noCache: true }
       },
       {
+        path: 'chat',
+        component: () => import('@/views/client/chat'),
+        name: 'system-users',
+        meta: { title: '聊天機器人', icon: 'user', noCache: true }
+      },
+      {
         path: 'simple',
         component: () => import('@/views/client/simple'),
         name: 'system-users',
