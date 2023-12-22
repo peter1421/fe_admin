@@ -91,6 +91,32 @@ export const constantRoutes = [
  * 需要根据用户权限动态加载的路由
  */
 export const asyncRoutes = [
+  // 客戶端
+  {
+    path: '/client',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    name: 'system',
+    meta: {
+      title: '客戶端',
+      icon: 'international'
+    },
+    children: [
+      {
+        path: 'home',
+        component: () => import('@/views/client/home'),
+        name: 'system-users',
+        meta: { title: '客戶端首頁', icon: 'user', noCache: true }
+      },
+      {
+        path: 'simple',
+        component: () => import('@/views/client/simple'),
+        name: 'system-users',
+        meta: { title: '客戶端樣本', icon: 'user', noCache: true }
+      }
+    ]
+  },
   // 系统管理
   {
     path: '/system',

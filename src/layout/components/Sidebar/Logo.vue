@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
-    <transition name="sidebarLogoFade">
+    <!-- <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
         <h1 v-else class="sidebar-title">{{ title }} </h1>
@@ -9,6 +9,24 @@
         <img v-if="logo" :src="logo" class="sidebar-logo">
         <h1 class="sidebar-title">{{ title }} </h1>
       </router-link>
+    </transition> -->
+    <transition name="sidebarLogoFade">
+      <a
+        href="/"
+        class="navbar-brand"
+      >
+        <h4 class="m-0 text-primary">
+          <i class="fa fa-book" />eLEARNING
+        </h4>
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler me-4"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon" />
+      </button>
     </transition>
   </div>
 </template>

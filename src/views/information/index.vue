@@ -4,7 +4,7 @@
       <el-col :span="6">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>个人信息</span>
+            <span>個人資訊</span>
           </div>
           <div>
             <div style="text-align: center">
@@ -39,7 +39,7 @@
       <el-col :span="18">
         <el-card class="box-card" style="margin-left: 20px;">
           <div slot="header" class="clearfix">
-            <span>个人信息</span>
+            <span>個人資訊</span>
           </div>
           <div>
             <el-form ref="form" :rules="rules" :model="form" label-width="80px">
@@ -119,7 +119,7 @@ export default {
     cropUploadSuccess() {
       store.dispatch('user/getInfo').then(() => {})
     },
-    // 修改个人信息
+    // 修改個人資訊
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
