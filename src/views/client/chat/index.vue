@@ -72,32 +72,9 @@
               </div>
               <div class="chat-data-block">
                 <div class="row">
-                  <div class="col-lg-6 chat-data-left scroller">
+                  <div class="col-lg-6 chat-data-left scroller  mt-2 pl-3">
                     <div class="chat-sidebar-channel scroller mt-2 pl-3">
-                      <pre class="line-numbers"><code class="language-python">
-import pandas as pd
-# 讀取 CSV 文件
-df = pd.read_csv('sales_data.csv')
-
-# 顯示前五行數據以檢查數據是否正確載入
-print(df.head())
-
-# 基本的數據處理
-# 計算每個商品的總銷售額
-df['Total_Sales'] = df['Quantity'] * df['Price']
-
-# 分組聚合，按商品名稱計算總銷售額
-total_sales_per_product = df.groupby('Product')['Total_Sales'].sum()
-
-# 輸出結果
-print("Total Sales per Product:")
-print(total_sales_per_product)
-
-# 也可以進行其他統計計算，比如平均銷售價格等
-average_price_per_product = df.groupby('Product')['Price'].mean()
-print("Average Price per Product:")
-print(average_price_per_product)
-                                        </code></pre>
+                      <pre><code class="language-python line-numbers">{{ code }}</code></pre>
                     </div>
                   </div>
                   <div class="col-lg-6 chat-data p-0 chat-data-right">
@@ -151,14 +128,42 @@ import { getDepartments, deleteDepartment, deleteDepartments } from '@/api/syste
 import '../../../assets/css/bootstrap.min.css'
 import '../../../assets/css/style.css'
 import '../../../assets/css/remixicon.css'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css' // 主題樣式
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
+
 export default {
-  name: 'Departments',
+  name: 'CodeHighlighter',
   data() {
     return {
       form: {
         search: '',
         ordering: 'id'
       },
+      code: `
+import pandas as pd
+# 讀取 CSV 文件
+df = pd.read_csv('sales_data.csv')
+
+# 顯示前五行數據以檢查數據是否正確載入
+print(df.head())
+
+# 基本的數據處理
+# 計算每個商品的總銷售額
+df['Total_Sales'] = df['Quantity'] * df['Price']
+
+# 分組聚合，按商品名稱計算總銷售額
+total_sales_per_product = df.groupby('Product')['Total_Sales'].sum()
+
+# 輸出結果
+print("Total Sales per Product:")
+print(total_sales_per_product)
+
+# 也可以進行其他統計計算，比如平均銷售價格等
+average_price_per_product = df.groupby('Product')['Price'].mean()
+print("Average Price per Product:")
+print(average_price_per_product)
+      `,
       tableData: [],
       isAllSelect: false,
       multipleSelection: [],
@@ -166,6 +171,11 @@ export default {
       cuDialogVisible: false,
       curId: null
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      Prism.highlightAll()
+    })
   },
   created() {
     this.search()
