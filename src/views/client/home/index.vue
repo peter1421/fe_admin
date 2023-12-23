@@ -511,6 +511,8 @@ import { getDepartments } from '@/api/system/departments'
 import { mapGetters } from 'vuex'
 import '../../../assets/css/bootstrap.min.css'
 import '../../../assets/css/style.css'
+import '../../../assets/css/responsive.css'
+
 export default {
   name: 'Users',
   components: { cuForm, resetPwdForm, permissionsDialog },
@@ -692,6 +694,127 @@ export default {
     }
   }
 
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('#chat-form').onsubmit = function() {
+    const messageInput = document.querySelector('#message-input')
+    const message = messageInput.value.trim() // 使用 trim() 移除兩端空白字符
+    messageInput.value = '' // 清空输入框
+
+    if (message.length <= 0 || message.length > 500) {
+      alert('你在填三小啦')
+      return false
+    }
+    let emotion = 'excited' // 預設
+
+    if (message.includes('sad')) {
+      emotion = 'sad'
+    } else if (message.includes('angry')) {
+      emotion = 'angry'
+    } else if (message.includes('excited')) {
+      emotion = 'excited'
+    } else if (message.includes('happy')) {
+      emotion = 'happy'
+    } else if (message.includes('neutral')) {
+      emotion = 'neutral'
+    } else if (message.includes('fearful')) {
+      emotion = 'fearful'
+    }
+    // 显示用户消息
+    const userMessageDiv = document.createElement('div')
+    userMessageDiv.className = 'chat'
+    userMessageDiv.innerHTML = `<div class="chat-message"><p>${message}</p></div>`
+    document.querySelector('#chat-area').appendChild(userMessageDiv)
+
+    // 发送 AJAX 请求到 Django 视图
+    fetch("{% url 'chatgpt_post' %}", {
+      method: 'POST',
+      body: JSON.stringify({ message: message }),
+      headers: {
+        'X-CSRFToken': getCookie('csrftoken'),
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // 显示 ChatGPT 的回复
+        const gptResponseDiv = document.createElement('div')
+        gptResponseDiv.className = 'chat chat-left'
+        gptResponseDiv.innerHTML = `<div class="chat-message"><p>${data.response}</p></div>`
+        document.querySelector('#chat-area').appendChild(gptResponseDiv)
+        speak(data.response, emotion)
+      })
+      .then(() => {
+        // 滚动到底部
+        const chatArea = document.querySelector('#chat-area')
+        chatArea.scrollTop = chatArea.scrollHeight
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+      })
+
+    return false
+  }
+})
+
+function getCookie(name) {
+  let cookieValue = null
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';')
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim()
+      if (cookie.substring(0, name.length + 1) === name + '=') {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+        break
+      }
+    }
+  }
+  return cookieValue
+}
+// JavaScript函數來控制語音
+function speak(response, emotion) {
+  var synth = window.speechSynthesis
+  var utterThis = new SpeechSynthesisUtterance(response)
+  switch (emotion) {
+    case 'excited':
+      utterThis.rate = 1.5 // 加快語速
+      utterThis.pitch = 1.5 // 提高音調
+      break
+    case 'angry':
+      utterThis.rate = 1.2 // 輕微加快語速
+      utterThis.pitch = 0.7 // 降低音調
+      utterThis.volume = 1.2 // 提高音量
+      break
+    case 'sad':
+      utterThis.rate = 0.8 // 減慢語速
+      utterThis.pitch = 0.6 // 降低音調
+      utterThis.volume = 0.7 // 減少音量
+      break
+    case 'fearful':
+      utterThis.rate = 1.1 // 輕微加快語速
+      utterThis.pitch = 1.4 // 提高音調
+      utterThis.volume = 0.7 // 減少音量
+      break
+    case 'surprised':
+      utterThis.rate = 1.0 // 正常語速
+      utterThis.pitch = 1.6 // 大幅提高音調
+      break
+    case 'calm':
+      utterThis.rate = 1.0 // 正常語速
+      utterThis.pitch = 0.8 // 略低音調
+      break
+        // 可以添加更多情感的處理
+  }
+  utterThis.onend = function() {
+    // 模擬說完話後恢復原來表情
+    document.getElementById('character').src =
+          "{% core_custom_tag 'images/chat/fish1.gif' %}"
+  }
+  synth.speak(utterThis)
+
+  // 更新GIF來模擬表情變化
+  document.getElementById('character').src =
+        "{% core_custom_tag 'images/chat/fish2.gif' %}"
 }
 </script>
 <style scoped>

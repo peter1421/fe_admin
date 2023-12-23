@@ -23,7 +23,7 @@ router.beforeEach(async(to, from, next) => {
   if (hasToken) {
     // 已登录且要跳转的页面是登录页
     if (to.path === '/login') {
-      // 如果已登录，请重定向到主页
+      // 如果已登录，请重定向到首頁
       next({ path: '/' })
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
@@ -34,7 +34,9 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           // 生成可访问的路线图
-          const accessRoutes = await store.dispatch('permission/generateRoutes')
+          const accessRoutes = await store.dispatch(
+            'permission/generateRoutes'
+          )
 
           // 动态添加可访问的路线
           router.addRoutes(accessRoutes)

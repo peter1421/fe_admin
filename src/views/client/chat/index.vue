@@ -1,79 +1,80 @@
 <template>
   <div class="app-container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="iq-card">
-          <div class="iq-card-body chat-page p-0">
-            <div class="chat-head">
-              <header
-                class="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3"
-              >
-                <div class="d-flex align-items-center">
-                  <div id="sidebar-toggle" class="sidebar-toggle">
-                    <i class="ri-menu-3-line" />
+    <div id="content-page" class="content-page">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="iq-card">
+            <div class="iq-card-body chat-page p-0">
+              <div class="chat-head">
+                <header
+                  class="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3"
+                >
+                  <div class="d-flex align-items-center">
+                    <div id="sidebar-toggle" class="sidebar-toggle">
+                      <i class="ri-menu-3-line" />
+                    </div>
+                    <div class="avatar chat-user-profile m-0 mr-3">
+                      <img
+                        id="character"
+                        :src="require('@/assets/img/chat/fish1.gif')"
+                        alt="Character Image"
+                        class="avatar-130"
+                        style="text-align: center"
+                      >
+                      <span
+                        class="avatar-status"
+                      ><i class="ri-checkbox-blank-circle-fill text-success" /></span>
+                    </div>
+                    <h5 class="mb-0">瑜伯伯-機器人聊天室</h5>
                   </div>
-                  <div class="avatar chat-user-profile m-0 mr-3">
-                    <img
-                      id="character"
-                      :src="require('@/assets/img/chat/fish1.gif')"
-                      alt="Character Image"
-                      class="avatar-130"
-                      style="text-align: center"
-                    >
-                    <span
-                      class="avatar-status"
-                    ><i class="ri-checkbox-blank-circle-fill text-success" /></span>
-                  </div>
-                  <h5 class="mb-0">瑜伯伯-機器人聊天室</h5>
-                </div>
 
-                <div class="chat-header-icons d-flex">
-                  <a href="javascript:void();" class="chat-icon-phone">
-                    <i class="ri-phone-line" />
-                  </a>
-                  <a href="javascript:void();" class="chat-icon-video">
-                    <i class="ri-vidicon-line" />
-                  </a>
-                  <a href="javascript:void();" class="chat-icon-delete">
-                    <i class="ri-delete-bin-line" />
-                  </a>
-                  <span class="dropdown">
-                    <i
-                      id="dropdownMenuButton"
-                      class="ri-more-2-line cursor-pointer dropdown-toggle nav-hide-arrow cursor-pointer pr-0"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      role="menu"
-                    />
-                    <span
-                      class="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a
-                        class="dropdown-item"
-                        href="JavaScript:void(0);"
-                      ><i class="fa fa-thumb-tack" aria-hidden="true" /> Pin
-                        to top</a>
-                      <a
-                        class="dropdown-item"
-                        href="JavaScript:void(0);"
-                      ><i class="fa fa-trash-o" aria-hidden="true" /> Delete
-                        chat</a>
-                      <a
-                        class="dropdown-item"
-                        href="JavaScript:void(0);"
-                      ><i class="fa fa-ban" aria-hidden="true" /> Block</a>
+                  <div class="chat-header-icons d-flex">
+                    <a href="javascript:void();" class="chat-icon-phone">
+                      <i class="ri-phone-line" />
+                    </a>
+                    <a href="javascript:void();" class="chat-icon-video">
+                      <i class="ri-vidicon-line" />
+                    </a>
+                    <a href="javascript:void();" class="chat-icon-delete">
+                      <i class="ri-delete-bin-line" />
+                    </a>
+                    <span class="dropdown">
+                      <i
+                        id="dropdownMenuButton"
+                        class="ri-more-2-line cursor-pointer dropdown-toggle nav-hide-arrow cursor-pointer pr-0"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        role="menu"
+                      />
+                      <span
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <a
+                          class="dropdown-item"
+                          href="JavaScript:void(0);"
+                        ><i class="fa fa-thumb-tack" aria-hidden="true" /> Pin
+                          to top</a>
+                        <a
+                          class="dropdown-item"
+                          href="JavaScript:void(0);"
+                        ><i class="fa fa-trash-o" aria-hidden="true" /> Delete
+                          chat</a>
+                        <a
+                          class="dropdown-item"
+                          href="JavaScript:void(0);"
+                        ><i class="fa fa-ban" aria-hidden="true" /> Block</a>
+                      </span>
                     </span>
-                  </span>
-                </div>
-              </header>
-            </div>
-            <div class="chat-data-block">
-              <div class="row">
-                <div class="col-lg-6 chat-data-left scroller">
-                  <div class="chat-sidebar-channel scroller mt-2 pl-3">
-                    <pre class="line-numbers"><code class="language-python">
+                  </div>
+                </header>
+              </div>
+              <div class="chat-data-block">
+                <div class="row">
+                  <div class="col-lg-6 chat-data-left scroller">
+                    <div class="chat-sidebar-channel scroller mt-2 pl-3">
+                      <pre class="line-numbers"><code class="language-python">
 import pandas as pd
 # 讀取 CSV 文件
 df = pd.read_csv('sales_data.csv')
@@ -97,21 +98,18 @@ average_price_per_product = df.groupby('Product')['Price'].mean()
 print("Average Price per Product:")
 print(average_price_per_product)
                                         </code></pre>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-6 chat-data p-0 chat-data-right">
-                  <div class="tab-content">
-                    <div
-                      id="chatbox1"
-                      class="tab-pane fade active show"
-                      role="tabpanel"
-                    >
-                      {% comment %}
-                      <div id="chatbox1" class="tab-pane fade" role="tabpanel">
-                        {% endcomment %}
+                  <div class="col-lg-6 chat-data p-0 chat-data-right">
+                    <div class="tab-content">
+                      <div
+                        id="chatbox1"
+                        class="tab-pane fade active show"
+                        role="tabpanel"
+                      >
 
                         <div id="chat-area" class="chat-content scroller">
-                          <!-- 聊天内容将在这里显示 -->
+                        <!-- 聊天内容将在这里显示 -->
                         </div>
 
                         <!-- 聊天輸入區塊 -->
@@ -131,10 +129,8 @@ print(average_price_per_product)
                               type="submit"
                               class="btn btn-primary d-flex align-items-center p-2"
                             >
-                              <i
-                                class="fa fa-paper-plane-o"
-                                aria-hidden="true"
-                              /><span class="d-none d-lg-block ml-1">Send</span>
+                              <svg-icon icon-class="guide" />
+                              <span class="d-none d-lg-block ml-1">Send</span>
                             </button>
                           </form>
                         </div>
@@ -152,6 +148,9 @@ print(average_price_per_product)
 </template>
 <script>
 import { getDepartments, deleteDepartment, deleteDepartments } from '@/api/system/departments'
+import '../../../assets/css/bootstrap.min.css'
+import '../../../assets/css/style.css'
+import '../../../assets/css/remixicon.css'
 export default {
   name: 'Departments',
   data() {
