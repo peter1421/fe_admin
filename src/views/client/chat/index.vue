@@ -86,27 +86,19 @@
                       >
 
                         <div id="chat-area" class="chat-content scroller">
-                        <!-- 聊天内容将在这里显示 -->
+                          <!-- 使用 v-for 渲染每條消息 -->
+                          <div v-for="(message, index) in messages" :key="index" class="chat" :class="{'chat-left': message.sender === 'bot'}">
+                            <div class="chat-message">
+                              <p>{{ message.text }}</p>
+                            </div>
+                          </div>
                         </div>
 
                         <!-- 聊天輸入區塊 -->
                         <div class="chat-footer p-3 bg-white">
-                          <form
-                            id="chat-form"
-                            class="d-flex align-items-center"
-                            action="javascript:void(0);"
-                          >
-                            <input
-                              id="message-input"
-                              type="text"
-                              class="form-control mr-3"
-                              placeholder="Type your message"
-                            >
-                            <button
-                              type="submit"
-                              class="btn btn-primary d-flex align-items-center p-2"
-                            >
-                              <svg-icon icon-class="guide" />
+                          <form @submit.prevent="sendMessage">
+                            <input v-model="newMessage" type="text" class="form-control mr-3" placeholder="Type your message">
+                            <button type="submit" class="btn btn-primary d-flex align-items-center p-2">
                               <span class="d-none d-lg-block ml-1">Send</span>
                             </button>
                           </form>
@@ -124,18 +116,18 @@
   </div>
 </template>
 <script>
-import { getDepartments, deleteDepartment, deleteDepartments } from '@/api/system/departments'
 import '../../../assets/css/bootstrap.min.css'
 import '../../../assets/css/style.css'
 import '../../../assets/css/remixicon.css'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css' // 主題樣式
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
-
 export default {
   name: 'CodeHighlighter',
   data() {
     return {
+      newMessage: '',
+      messages: [],
       form: {
         search: '',
         ordering: 'id'
@@ -177,111 +169,34 @@ print(average_price_per_product)
       Prism.highlightAll()
     })
   },
-  created() {
-    this.search()
-  },
   methods: {
-    // 获取部门Tree列表/搜索功能
-    search() {
-      getDepartments(this.form).then(res => {
-        this.tableData = res.data.results
-      })
+    sendMessage() {
+      if (!this.newMessage) return
+      this.messages.push({ sender: 'user', text: this.newMessage })
+      this.autoReply()
+      this.newMessage = ''
     },
-    // 重置
-    resetForm() {
-      this.$refs.form.resetFields()
-      this.search()
-    },
-    // 删除部门
-    deleteDepartment(row) {
-      this.$confirm('此操作将删除部门 "' + row.name + '" 及其子部门' + ' , 是否继续？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        deleteDepartment(row.id).then(res => {
-          this.$message({
-            message: '删除部门' + row.name + '成功',
-            type: 'success'
-          })
-          // 刷新table
-          this.search()
-        })
-      })
-    },
-    // 批量删除部门
-    deleteDepartments() {
-      this.$confirm('此操作将删除选中部门及其子部门' + ', 是否继续？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        deleteDepartments(this.multipleSelection).then(res => {
-          this.$message({
-            message: '删除部门成功',
-            type: 'success'
-          })
-          // 刷新table
-          this.search()
-        })
-      })
-    },
-    // table全选事件
-    selectAllChange(selection) {
-      // 如果选中的数目与请求到的数目相同就选中所有子节点，否则就清空
-      console.log(selection)
-      if (selection && selection.length === this.tableData.length && selection[0].id === this.tableData[0].id) {
-        selection.forEach(val => {
-          this.selectChange(selection, val)
-        })
-      } else {
-        this.$refs.table.clearSelection()
-      }
-    },
-    // 选项框点击事件
-    selectChange(selection, row) {
-      // 如果selection中存在row代表是选中，否则是取消选中
-      if (selection.indexOf(row) !== -1) {
-        if (row.children) {
-          row.children.forEach(val => {
-            selection.push(val)
-            this.$refs.table.toggleRowSelection(val, true)
-            this.selectChange(selection, val)
-          })
-        }
-      } else {
-        this.reverseRowSelection(selection, row)
-      }
-    },
-    // 取消选择
-    reverseRowSelection(selection, data) {
-      if (data.children) {
-        data.children.forEach(val => {
-          this.$refs.table.toggleRowSelection(val, false)
-          if (val.children) {
-            this.reverseRowSelection(selection, val)
-          }
-        })
-      }
-    },
-    // 选项改变时触发
-    handleSelectionChange(val) {
-      const deleteIds = []
-      this.$refs.table.selection.forEach(data => deleteIds.push(data.id))
-      this.multipleSelection = deleteIds
-    },
-    // cuForm子组件
-    createDepartment() {
-      this.cuDialogVisible = true
-    },
-    updateDepartment(row) {
-      this.curId = row.id
-      this.cuDialogVisible = true
-    },
-    close() {
-      this.cuDialogVisible = false
-      this.curId = null
+    autoReply() {
+      setTimeout(() => {
+        this.messages.push({ sender: 'bot', text: '嗨! 有什么我可以帮助你的吗?' })
+      }, 1000)
     }
   }
 }
 </script>
+<style>
+/* 新增的 CSS 樣式 */
+.chat-message {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.chat-message-user {
+  background-color: #e1f5fe;
+  text-align: left;
+}
+.chat-message-bot {
+  background-color: #fce4ec;
+  text-align: right;
+}
+</style>
