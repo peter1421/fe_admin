@@ -9,8 +9,8 @@
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
         <a href="/#/client/home" class="nav-item nav-link">客戶端</a>
-        <a href="#" class="nav-item nav-link">聊天</a>
-        <a href="#" class="nav-item nav-link">儀表板</a>
+        <a href="/#/client/chat" class="nav-item nav-link">聊天</a>
+        <a href="/#/dashboard" class="nav-item nav-link">儀表板</a>
         <div class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"

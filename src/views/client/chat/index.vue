@@ -5,71 +5,7 @@
         <div class="col-sm-12">
           <div class="iq-card">
             <div class="iq-card-body chat-page p-0">
-              <div class="chat-head">
-                <header
-                  class="d-flex justify-content-between align-items-center bg-white pt-3 pr-3 pb-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <div id="sidebar-toggle" class="sidebar-toggle">
-                      <i class="ri-menu-3-line" />
-                    </div>
-                    <div class="avatar chat-user-profile m-0 mr-3">
-                      <img
-                        id="character"
-                        :src="require('@/assets/img/chat/fish1.gif')"
-                        alt="Character Image"
-                        class="avatar-130"
-                        style="text-align: center"
-                      >
-                      <span
-                        class="avatar-status"
-                      ><i class="ri-checkbox-blank-circle-fill text-success" /></span>
-                    </div>
-                    <h5 class="mb-0">瑜伯伯-機器人聊天室</h5>
-                  </div>
-
-                  <div class="chat-header-icons d-flex">
-                    <a href="javascript:void();" class="chat-icon-phone">
-                      <i class="ri-phone-line" />
-                    </a>
-                    <a href="javascript:void();" class="chat-icon-video">
-                      <i class="ri-vidicon-line" />
-                    </a>
-                    <a href="javascript:void();" class="chat-icon-delete">
-                      <i class="ri-delete-bin-line" />
-                    </a>
-                    <span class="dropdown">
-                      <i
-                        id="dropdownMenuButton"
-                        class="ri-more-2-line cursor-pointer dropdown-toggle nav-hide-arrow cursor-pointer pr-0"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        role="menu"
-                      />
-                      <span
-                        class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="dropdownMenuButton"
-                      >
-                        <a
-                          class="dropdown-item"
-                          href="JavaScript:void(0);"
-                        ><i class="fa fa-thumb-tack" aria-hidden="true" /> Pin
-                          to top</a>
-                        <a
-                          class="dropdown-item"
-                          href="JavaScript:void(0);"
-                        ><i class="fa fa-trash-o" aria-hidden="true" /> Delete
-                          chat</a>
-                        <a
-                          class="dropdown-item"
-                          href="JavaScript:void(0);"
-                        ><i class="fa fa-ban" aria-hidden="true" /> Block</a>
-                      </span>
-                    </span>
-                  </div>
-                </header>
-              </div>
+              <chat-header />
               <div class="chat-data-block">
                 <div class="row">
                   <div class="col-lg-6 chat-data-left scroller  mt-2 pl-3">
@@ -84,25 +20,12 @@
                         class="tab-pane fade active show"
                         role="tabpanel"
                       >
-
                         <div id="chat-area" class="chat-content scroller">
                           <!-- 使用 v-for 渲染每條消息 -->
-                          <div v-for="(message, index) in messages" :key="index" class="chat" :class="{'chat-left': message.sender === 'bot'}">
-                            <div class="chat-message">
-                              <p>{{ message.text }}</p>
-                            </div>
-                          </div>
+                          <chat-message v-for="(message, index) in messages" :key="index" :message="message" />
                         </div>
-
                         <!-- 聊天輸入區塊 -->
-                        <div class="chat-footer p-3 bg-white">
-                          <form @submit.prevent="sendMessage">
-                            <input v-model="newMessage" type="text" class="form-control mr-3" placeholder="Type your message">
-                            <button type="submit" class="btn btn-primary d-flex align-items-center p-2">
-                              <span class="d-none d-lg-block ml-1">Send</span>
-                            </button>
-                          </form>
-                        </div>
+                        <message-input @sendMessage="sendMessage" />
                       </div>
                     </div>
                   </div>
@@ -116,6 +39,9 @@
   </div>
 </template>
 <script>
+import chatHeader from './components/chatHeader'
+import chatMessage from './components/chatMessage'
+import messageInput from './components/messageInput'
 import '../../../assets/css/bootstrap.min.css'
 import '../../../assets/css/style.css'
 import '../../../assets/css/remixicon.css'
@@ -123,7 +49,12 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism.css' // 主題樣式
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
 export default {
-  name: 'CodeHighlighter',
+  name: 'MainComponent',
+  components: {
+    chatHeader,
+    chatMessage,
+    messageInput
+  },
   data() {
     return {
       newMessage: '',
@@ -170,7 +101,8 @@ print(average_price_per_product)
     })
   },
   methods: {
-    sendMessage() {
+    sendMessage(message) {
+      this.newMessage = message
       if (!this.newMessage) return
       this.messages.push({ sender: 'user', text: this.newMessage })
       this.autoReply()
@@ -178,7 +110,7 @@ print(average_price_per_product)
     },
     autoReply() {
       setTimeout(() => {
-        this.messages.push({ sender: 'bot', text: '嗨! 有什么我可以帮助你的吗?' })
+        this.messages.push({ sender: 'bot', text: '嗨! 你好' })
       }, 1000)
     }
   }
