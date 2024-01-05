@@ -4,7 +4,7 @@
       <el-col :span="6">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>个人信息</span>
+            <span>個人資訊</span>
           </div>
           <div>
             <div style="text-align: center">
@@ -39,7 +39,7 @@
       <el-col :span="18">
         <el-card class="box-card" style="margin-left: 20px;">
           <div slot="header" class="clearfix">
-            <span>个人信息</span>
+            <span>個人資訊</span>
           </div>
           <div>
             <el-form ref="form" :rules="rules" :model="form" label-width="80px">
@@ -53,6 +53,9 @@
               </el-form-item>
               <el-form-item label="邮箱" prop="email">
                 <el-input v-model="form.email" style="width: 40%" />
+              </el-form-item>
+              <el-form-item label="性別" prop="gender">
+                <el-input v-model="form.gender" style="width: 40%" />
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')">保存配置</el-button>
@@ -104,11 +107,13 @@ export default {
       'name',
       'avatar',
       'mobile',
-      'email'
+      'email',
+      'gender'
     ])
   },
   created() {
-    this.form = { name: this.name, mobile: this.mobile, email: this.email }
+    this.form = { name: this.name, mobile: this.mobile, email: this.email, gender: this.gender }
+    console.log(this.form)
     store.dispatch('user/getInfo').then(() => {})
   },
   methods: {
@@ -119,8 +124,9 @@ export default {
     cropUploadSuccess() {
       store.dispatch('user/getInfo').then(() => {})
     },
-    // 修改个人信息
+    // 修改個人資訊
     onSubmit(formName) {
+      console.log(this.form)
       this.$refs[formName].validate((valid) => {
         if (valid) {
         //   if (this.form.mobile === '') {

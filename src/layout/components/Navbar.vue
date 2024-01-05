@@ -1,5 +1,73 @@
 <template>
-  <div class="navbar">
+  <nav
+    class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
+  >
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+      <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <a href="/#/client/home" class="nav-item nav-link">客戶端</a>
+        <a href="/#/client/chat" class="nav-item nav-link">聊天</a>
+        <a href="/#/dashboard" class="nav-item nav-link">儀表板</a>
+        <div class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+          >可以下拉</a>
+          <div class="dropdown-menu fade-down m-0">
+            <a href="#" class="dropdown-item">拉拉拉</a>
+            <a href="#" class="dropdown-item">拉拉拉</a>
+          </div>
+        </div>
+        <a href="/client/contact" class="nav-item nav-link active">會發光的連結</a>
+
+        <a
+          href=""
+          class="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
+        >HI<i class="fa fa-arrow-right ms-3" /></a>
+      </div>
+    </div>
+    <div class="right-menu">
+      <template v-if="device!=='mobile'">
+        <search id="header-search" class="right-menu-item" />
+
+        <error-log class="errLog-container right-menu-item hover-effect" />
+
+        <el-tooltip content="全屏缩放" effect="dark" placement="bottom">
+          <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        </el-tooltip>
+
+        <el-tooltip content="页面布局" effect="dark" placement="bottom">
+          <size-select id="size-select" class="right-menu-item hover-effect" />
+        </el-tooltip>
+
+      </template>
+
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/profile/index">
+            <el-dropdown-item>个人中心</el-dropdown-item>
+          </router-link>
+          <router-link to="/">
+            <el-dropdown-item>首頁</el-dropdown-item>
+          </router-link>
+          <a target="_blank" href="https://github.com/TianPangJi/drf_admin/">
+            <el-dropdown-item>Github</el-dropdown-item>
+          </a>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display:block;">退出</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+  </nav>
+  <!-- <nav class="navbar">
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
@@ -30,7 +98,7 @@
             <el-dropdown-item>个人中心</el-dropdown-item>
           </router-link>
           <router-link to="/">
-            <el-dropdown-item>主页</el-dropdown-item>
+            <el-dropdown-item>首頁</el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://github.com/TianPangJi/drf_admin/">
             <el-dropdown-item>Github</el-dropdown-item>
@@ -41,7 +109,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-  </div>
+  </nav> -->
 </template>
 
 <script>
@@ -52,7 +120,8 @@ import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
-
+import '../../assets/css/bootstrap.min.css'
+import '../../assets/css/style.css'
 export default {
   components: {
     Breadcrumb,
@@ -83,11 +152,11 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  // height: 50px;
+  // overflow: hidden;
+  // position: relative;
+  // background: #fff;
+  // box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
   .hamburger-container {
     line-height: 46px;

@@ -8,6 +8,7 @@ const getters = {
   userId: state => state.user.userId,
   name: state => state.user.name,
   username: state => state.user.username,
+  gender: state => state.user.gender,
   email: state => state.user.email,
   avatar: state => state.user.avatar,
   permissions: state => state.user.permissions,
