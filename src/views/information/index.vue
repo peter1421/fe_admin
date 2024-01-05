@@ -54,6 +54,9 @@
               <el-form-item label="邮箱" prop="email">
                 <el-input v-model="form.email" style="width: 40%" />
               </el-form-item>
+              <el-form-item label="性別" prop="gender">
+                <el-input v-model="form.gender" style="width: 40%" />
+              </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')">保存配置</el-button>
               </el-form-item>
@@ -104,11 +107,13 @@ export default {
       'name',
       'avatar',
       'mobile',
-      'email'
+      'email',
+      'gender'
     ])
   },
   created() {
-    this.form = { name: this.name, mobile: this.mobile, email: this.email }
+    this.form = { name: this.name, mobile: this.mobile, email: this.email, gender: this.gender }
+    console.log(this.form)
     store.dispatch('user/getInfo').then(() => {})
   },
   methods: {
@@ -121,6 +126,7 @@ export default {
     },
     // 修改個人資訊
     onSubmit(formName) {
+      console.log(this.form)
       this.$refs[formName].validate((valid) => {
         if (valid) {
         //   if (this.form.mobile === '') {
