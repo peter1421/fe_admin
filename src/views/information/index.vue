@@ -113,7 +113,6 @@ export default {
   },
   created() {
     this.form = { name: this.name, mobile: this.mobile, email: this.email, gender: this.gender }
-    console.log(this.form)
     store.dispatch('user/getInfo').then(() => {})
   },
   methods: {
@@ -126,7 +125,6 @@ export default {
     },
     // 修改個人資訊
     onSubmit(formName) {
-      console.log(this.form)
       this.$refs[formName].validate((valid) => {
         if (valid) {
         //   if (this.form.mobile === '') {
