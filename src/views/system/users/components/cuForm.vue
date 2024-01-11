@@ -1,28 +1,28 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :title="curId ? '编辑用户' : '新增用户'" width="700px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯使用者' : '新增使用者'" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="用户名" prop="username">
+      <el-form-item label="使用者名稱" prop="username">
         <el-input v-model="ruleForm.username" clearable autocomplete="off" />
       </el-form-item>
       <el-form-item label="姓名" prop="name">
         <el-input v-model="ruleForm.name" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="手机号" prop="mobile">
+      <el-form-item label="手機號碼" prop="mobile">
         <el-input v-model="ruleForm.mobile" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="邮箱" prop="email">
+      <el-form-item label="電子郵件" prop="email">
         <el-input v-model="ruleForm.email" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="部门" prop="department">
+      <el-form-item label="班級" prop="department">
         <treeselect
           v-model="ruleForm.department"
           :options="departmentsData"
           style="width: 178px"
-          placeholder="选择部门"
+          placeholder="選擇班級"
         />
       </el-form-item>
       <el-form-item label="角色" prop="roles">
-        <el-select v-model="ruleForm.roles" multiple placeholder="选择角色">
+        <el-select v-model="ruleForm.roles" multiple placeholder="選擇角色">
           <el-option
             v-for="item in rolesData"
             :key="item.name"
@@ -32,7 +32,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">送出</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>

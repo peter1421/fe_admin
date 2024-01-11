@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form ref="form" :model="form" inline>
       <el-form-item prop="search">
-        <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入部门名称搜索" />
+        <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="搜尋班級" />
       </el-form-item>
       <el-form-item>
-        <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
+        <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜尋</el-button>
         <el-button type="warning" icon="el-icon-refresh-left" size="medium" @click="resetForm()">重置</el-button>
       </el-form-item>
     </el-form>
@@ -27,20 +27,20 @@
       />
       <el-table-column
         prop="name"
-        label="部门"
+        label="班級"
       />
       <el-table-column
         prop="create_time"
-        label="创建时间"
+        label="新增時間"
       />
       <el-table-column
         fixed="right"
         align="center"
-        label="操作"
+        label="動作"
         width="220"
       >
         <template slot-scope="{row}">
-          <el-button v-permission="['admin','system-departments-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateDepartment(row)">编辑</el-button>
+          <el-button v-permission="['admin','system-departments-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateDepartment(row)">編輯</el-button>
           <el-button v-permission="['admin','system-departments-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteDepartment(row)">删除</el-button>
         </template>
       </el-table-column>
@@ -85,14 +85,14 @@ export default {
     },
     // 删除部门
     deleteDepartment(row) {
-      this.$confirm('此操作将删除部门 "' + row.name + '" 及其子部门' + ' , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此動作將刪除班級 "' + row.name + '" 及其群組' + ' , 是否繼續？', '提醒', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteDepartment(row.id).then(res => {
           this.$message({
-            message: '删除部门' + row.name + '成功',
+            message: '删除班級' + row.name + '成功',
             type: 'success'
           })
           // 刷新table
