@@ -15,6 +15,7 @@ const getters = {
   department: state => state.user.department,
   mobile: state => state.user.mobile,
   permission_routes: state => state.permission.routes,
-  errorLogs: state => state.errorLog.logs
+  errorLogs: state => state.errorLog.logs,
+  chatMessages: state => state.chatbot.chatMessages
 }
 export default getters

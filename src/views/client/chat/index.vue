@@ -88,7 +88,8 @@ import pandas as pd
       'mobile',
       'email',
       'gender',
-      'userId'
+      'userId',
+      'chatMessages'
     ])
   },
   mounted() {
@@ -109,13 +110,18 @@ import pandas as pd
       }
       sendMessage(messageLog).then(res => {
         this.$message({
-          message: '修改成功',
+          message: '送出成功',
           type: 'success'
         })
-        store.dispatch('chatbot/get-message/').then(() => {})
       })
-      this.messages.push({ sender: 'user', text: this.newMessage })
-      this.autoReply()
+      // TODO:現在是全部重新載入，之後要改成只載入最新的
+      store.dispatch('chatbot/getMessages').then(() => {
+        this.messages = []
+        this.chatMessages.forEach(chatMessage => {
+          console.log(chatMessage)
+          this.messages.push({ sender: chatMessage.sender, text: chatMessage.message })
+        })
+      })
       this.newMessage = ''
     },
     autoReply() {
