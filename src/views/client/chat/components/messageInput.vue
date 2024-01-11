@@ -21,6 +21,21 @@ export default {
     send() {
       // alert(this.newMessage)
       this.$emit('sendMessage', this.newMessage)
+
+      // this.$refs[formName].validate((valid) => {
+      //   if (valid) {
+      //   //   if (this.form.mobile === '') {
+      //   //     this.form.mobile = null
+      //   //   }
+      // changeInformation(this.form).then(res => {
+      //   this.$message({
+      //     message: '修改成功',
+      //     type: 'success'
+      //   })
+      //   store.dispatch('user/getInfo').then(() => {})
+      // })
+      //   }
+      // })
       this.newMessage = ''
     }
   }

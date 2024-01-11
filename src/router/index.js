@@ -142,7 +142,7 @@ export const asyncRoutes = [
         name: 'system-users',
         meta: {
           permissions: ['admin', 'system-users'],
-          title: '用户管理',
+          title: '使用者管理',
           icon: 'user',
           noCache: true
         }

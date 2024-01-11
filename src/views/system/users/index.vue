@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row>
       <el-col :span="4">
-        <el-input v-model="filterText" clearable style="width:90%; margin-bottom: 20px;" prefix-icon="el-icon-search" placeholder="输入部门名称搜索" />
+        <el-input v-model="filterText" clearable style="width:90%; margin-bottom: 20px;" prefix-icon="el-icon-search" placeholder="输入班級名稱搜搜尋" />
         <el-tree
           ref="tree"
           class="filter-tree"
@@ -16,16 +16,16 @@
       <el-col :span="20">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入用户名、姓名、手机号、邮箱搜索" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入學生名稱、手機號碼、電子郵件搜尋" />
           </el-form-item>
           <el-form-item prop="is_active">
-            <el-select v-model="form.is_active" style="width:100px" clearable placeholder="状态">
-              <el-option label="激活" value="true" />
-              <el-option label="锁定" value="false" />
+            <el-select v-model="form.is_active" style="width:100px" clearable placeholder="狀態">
+              <el-option label="啟動" value="true" />
+              <el-option label="鎖定" value="false" />
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
+            <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜尋</el-button>
             <el-button type="warning" icon="el-icon-refresh-left" size="medium" @click="resetForm()">重置</el-button>
           </el-form-item>
         </el-form>
@@ -43,7 +43,7 @@
           />
           <el-table-column
             prop="username"
-            label="用户名"
+            label="用戶名"
           />
           <el-table-column
             prop="name"
@@ -51,25 +51,25 @@
           />
           <el-table-column
             prop="mobile"
-            label="电话"
+            label="電話"
             width="180"
           />
           <el-table-column
             prop="email"
-            label="邮箱"
+            label="郵件"
             width="180"
           />
           <el-table-column
             prop="department_name"
-            label="部门"
+            label="班級"
           />
           <el-table-column
             prop="date_joined"
-            label="创建时间"
+            label="新增時間"
             width="180"
           />
           <el-table-column
-            label="状态"
+            label="狀態"
             align="center"
             width="100"
           >
@@ -89,16 +89,16 @@
           <el-table-column
             fixed="right"
             align="center"
-            label="操作"
+            label="動作"
             width="230"
           >
             <template slot-scope="{row}">
               <el-button v-permission="['admin','system-users-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateUser(row)" />
               <el-button v-permission="['admin','system-users-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteUser(row)" />
-              <el-tooltip content="用户权限" placement="top">
+              <el-tooltip content="使用者權限" placement="top">
                 <el-button v-permission="['admin','system-users-permissions']" type="warning" icon="el-icon-user-solid" size="mini" @click="userPermissions(row)" />
               </el-tooltip>
-              <el-tooltip content="重置密码" placement="top">
+              <el-tooltip content="修改密碼" placement="top">
                 <el-button v-permission="['admin','system-users-reset-pwd']" type="warning" size="mini" @click="resetPass(row)"><svg-icon icon-class="reset_password" /></el-button>
               </el-tooltip>
             </template>
