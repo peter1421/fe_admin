@@ -37,7 +37,6 @@ const actions = {
   // Get chat messages
   getMessages({ commit }) {
     return new Promise((resolve, reject) => {
-      console.log('GG')
       commit('CLEAR_MESSAGES')
       getMessages().then(response => {
         const messages = response.data

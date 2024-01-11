@@ -51,6 +51,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
 import { mapGetters } from 'vuex'
 import { sendMessage } from '@/api/chatbot/message'
 import store from '@/store'
+// import { data } from 'vue-echarts'
 
 export default {
   name: 'MainComponent',
@@ -98,31 +99,58 @@ import pandas as pd
     })
   },
   created() {
+    this.getMessages()
+    this.scrollToBottom()
   },
   methods: {
     sendMessage(message) {
+      // TODO:整理成function
       this.newMessage = message
       if (!this.newMessage) return
       const messageLog = {
         'userId': this.userId,
         'sender': 'user',
-        'message': this.newMessage
+        'message': this.newMessage,
+        'bot_id': 0,
+        'chatroom_id': 0
       }
+      const userMessage = { sender: messageLog.sender, text: messageLog.message }
+      this.updateMessages(userMessage)
       sendMessage(messageLog).then(res => {
         this.$message({
           message: '送出成功',
           type: 'success'
         })
+        const data = res.data
+        // 將用戶消息和機器人回復添加到消息列表
+        const botMessage = { sender: data.bot_message.sender, text: data.bot_message.message }
+        this.updateMessages(botMessage)
       })
+    },
+    getMessages() {
       // TODO:現在是全部重新載入，之後要改成只載入最新的
       store.dispatch('chatbot/getMessages').then(() => {
         this.messages = []
         this.chatMessages.forEach(chatMessage => {
-          console.log(chatMessage)
           this.messages.push({ sender: chatMessage.sender, text: chatMessage.message })
         })
       })
       this.newMessage = ''
+    },
+    // 更新消息列表
+    updateMessages(newMessages) {
+      // this.$nextTick(() => {
+      this.messages.push(newMessages)
+      this.scrollToBottom()
+      // })
+    },
+    scrollToBottom() {
+      this.$nextTick(() => {
+        var chatArea = document.getElementById('chat-area')
+        if (chatArea) {
+          chatArea.scrollTop = chatArea.scrollHeight
+        }
+      })
     },
     autoReply() {
       setTimeout(() => {
