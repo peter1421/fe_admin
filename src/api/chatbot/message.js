@@ -11,7 +11,7 @@ export function sendMessage(data) {
 }
 
 // 取得對話
-export function getMessage(data) {
+export function getMessages(data) {
   return request({
     url: '/chatbot/get-message/',
     method: 'get',

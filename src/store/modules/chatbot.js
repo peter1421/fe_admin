@@ -1,3 +1,4 @@
+import { getMessages } from '@/api/chatbot/message'
 
 const state = {
   // ...其他狀態
@@ -31,6 +32,27 @@ const actions = {
   // 清空聊天記錄
   clearMessages({ commit }) {
     commit('CLEAR_MESSAGES')
+  },
+
+  // Get chat messages
+  getMessages({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit('CLEAR_MESSAGES')
+      getMessages().then(response => {
+        const messages = response.data
+        //   messages = [
+        //     {'userId': 1, 'sender': 'bot', 'message': 'Sample Message 1'},
+        //     {'userId': 2, 'sender': 'user', 'message': 'Sample Message 2'}
+        // ]
+        // return Response(messages)
+        messages.forEach(message => {
+          commit('ADD_MESSAGE', message)
+        })
+        resolve(messages)
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 }
 
