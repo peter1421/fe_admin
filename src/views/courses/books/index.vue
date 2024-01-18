@@ -1,19 +1,7 @@
 <template>
   <div class="app-container">
     <el-row>
-      <el-col :span="4">
-        <el-input v-model="filterText" clearable style="width:90%; margin-bottom: 20px;" prefix-icon="el-icon-search" placeholder="输入班級名稱搜搜尋" />
-        <el-tree
-          ref="tree"
-          class="filter-tree"
-          :data="departmentsData"
-          :props="defaultProps"
-          :expand-on-click-node="false"
-          :filter-node-method="filterNode"
-          @node-click="handleNodeClick"
-        />
-      </el-col>
-      <el-col :span="20">
+      <el-col :span="24">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
             <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入學生名稱、手機號碼、電子郵件搜尋" />
@@ -30,7 +18,6 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','system-users-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="addBook()">新增書籍</el-button>
-        <el-button v-permission="['admin','system-users-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createUser()">新增</el-button>
         <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteUsers(form)">删除</el-button>
         <el-table
           ref="multipleTable"
@@ -43,50 +30,36 @@
             width="55"
           />
           <el-table-column
-            prop="username"
-            label="用戶名"
+            prop="book_id"
+            label="ID"
           />
           <el-table-column
             prop="name"
-            label="姓名"
+            label="名稱"
           />
           <el-table-column
-            prop="mobile"
-            label="電話"
+            prop="description"
+            label="簡介"
             width="180"
           />
           <el-table-column
-            prop="email"
-            label="郵件"
+            prop="author"
+            label="作者"
+          />
+          <el-table-column
+            prop="publisher"
+            label="出版社"
             width="180"
           />
           <el-table-column
-            prop="department_name"
-            label="班級"
-          />
-          <el-table-column
-            prop="date_joined"
-            label="新增時間"
+            prop="category"
+            label="分類"
+            width="180"
+          /><el-table-column
+            prop="difficulty"
+            label="難度"
             width="180"
           />
-          <el-table-column
-            label="狀態"
-            align="center"
-            width="100"
-          >
-            <template slot-scope="{row}">
-              <!-- v-model="row.is_active" -->
-              <el-switch
-                v-model="row.is_active"
-                :disabled="!checkPermission(['admin','system-users-lock'])||row.id === userId"
-                :active-value="true"
-                :inactive-value="false"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
-                @change="changeIsActive($event, row)"
-              />
-            </template>
-          </el-table-column>
           <el-table-column
             fixed="right"
             align="center"
@@ -94,13 +67,10 @@
             width="230"
           >
             <template slot-scope="{row}">
-              <el-button v-permission="['admin','system-users-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateUser(row)" />
+              <el-button v-permission="['admin','system-users-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateBook(row)" />
               <el-button v-permission="['admin','system-users-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteUser(row)" />
               <el-tooltip content="使用者權限" placement="top">
                 <el-button v-permission="['admin','system-users-permissions']" type="warning" icon="el-icon-user-solid" size="mini" @click="userPermissions(row)" />
-              </el-tooltip>
-              <el-tooltip content="修改密碼" placement="top">
-                <el-button v-permission="['admin','system-users-reset-pwd']" type="warning" size="mini" @click="resetPass(row)"><svg-icon icon-class="reset_password" /></el-button>
               </el-tooltip>
             </template>
           </el-table-column>
@@ -130,8 +100,9 @@ import addBookForm from './components/addBookForm'
 import cuForm from './components/cuForm'
 import resetPwdForm from './components/resetPwdForm'
 import permissionsDialog from './components/permissionsDialog'
-import { getUsers, updateUserActive, deleteUser, deleteUsers } from '@/api/system/users'
+import { updateUserActive, deleteUser, deleteUsers } from '@/api/system/users'
 import { getDepartments } from '@/api/system/departments'
+import { getBooks } from '@/api/courses/books'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Users',
@@ -164,7 +135,9 @@ export default {
       permissionsDialogVisible: false,
 
       // book子组件
-      bookDialogVisible: false
+      bookDialogVisible: false,
+      book_id: null
+
     }
   },
   computed: {
@@ -199,11 +172,12 @@ export default {
       this.form.department_id = data.id
       this.search()
     },
-    // 获取用户列表/搜索功能
+    // 获取書籍列表/搜索功能
     search() {
-      getUsers(this.form).then(res => {
+      getBooks(this.form).then(res => {
         this.tableData = res.data.results
         this.total = res.data.count
+        console.log(this.tableData)
       })
     },
     // 重置
@@ -293,13 +267,19 @@ export default {
     createUser() {
       this.cuDialogVisible = true
     },
-    updateUser(row) {
-      this.curId = row.id
-      this.cuDialogVisible = true
+    updateBook(row) {
+      this.curId = row.book_id
+      this.bookDialogVisible = true
     },
+    // updateUser(row) {
+    //   this.curId = row.id
+    //   this.cuDialogVisible = true
+    // },
     close() {
       this.cuDialogVisible = false
+      this.bookDialogVisible = false
       this.curId = null
+      this.book_id = null
     },
     // 重置密码子组件
     resetPass(row) {

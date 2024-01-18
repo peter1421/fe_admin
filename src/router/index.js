@@ -197,9 +197,10 @@ export const asyncRoutes = [
           noCache: true
         }
       },
+      // 新增模組
       {
         path: 'books',
-        component: () => import('@/views/system/books'),
+        component: () => import('@/views/courses/books'),
         name: 'system-jobs',
         meta: {
           permissions: ['admin', 'system-jobs'],
