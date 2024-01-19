@@ -1,6 +1,6 @@
 <template>
   <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯書籍' : '新增書籍'" width="700px" :before-close="close">
-    <el-form ref="ruleForm" label-position="left  " :model="bookForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
+    <el-form ref="bookForm" label-position="left  " :model="bookForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-form-item label="書籍名稱" required>
         <el-input v-model="bookForm.name" />
       </el-form-item>
@@ -35,14 +35,14 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">送出</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('bookForm')">送出</el-button>
+        <el-button @click="resetForm('bookForm')">重置</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
 </template>
 <script>
-import { createBook, getBook, updateUser } from '@/api/courses/books'
+import { createBook, getBook } from '@/api/courses/books'
 import { getRoles } from '@/api/system/roles'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
@@ -60,31 +60,23 @@ export default {
     curId: {
       type: Number,
       default: null
-    },
-    departmentsData: {
-      type: Array,
-      default: () => {
-        return
-      }
     }
-
   },
 
   data() {
     return {
-      ruleForm: {
-        username: '',
-        name: '',
-        mobile: '',
-        email: '',
-        department: null,
-        roles: null
-      },
       rolesData: [],
       rules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' }],
-        email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
+        name: [{ required: true, message: '書名不能為空', trigger: 'blur' }],
+        description: [],
+        content: [],
+        author: [],
+        publisher: [],
+        publish_date: [
+          { type: 'date', message: '請輸入正確的日期格式', trigger: ['blur', 'change'] }
+        ],
+        category: [],
+        difficulty: []
       },
       bookForm: {
         name: null,
@@ -102,15 +94,8 @@ export default {
     dialogVisible(v) {
       if (v) {
         if (this.curId) {
-          // 编辑
-        // this.$nextTick(() => {
-        //   getUser(this.curId).then(res => {
-        //     this.ruleForm = res.data
-        //   })
-        // })
           getBook(this.curId).then(res => {
-            this.ruleForm = res.data
-            console.log(this.ruleForm)
+            this.bookForm = res.data
           })
         }
         this.getRoles()
@@ -119,7 +104,7 @@ export default {
   },
   methods: {
     close() {
-      this.$refs.ruleForm.resetFields()
+      this.$refs.bookForm.resetFields()
       this.$emit('close')
     },
     search() {
@@ -141,18 +126,17 @@ export default {
     },
     // 提交表单
     submitForm(formName) {
-      console.log(this.bookForm)
       this.saveBook()
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.bookId) {
-            updateUser(this.bookId, this.bookForm).then(res => {
-              this.$message({
-                message: '修改成功',
-                type: 'success'
-              })
-              this.search()
-            })
+            // updateUser(this.bookId, this.bookForm).then(res => {
+            //   this.$message({
+            //     message: '修改成功',
+            //     type: 'success'
+            //   })
+            //   this.search()
+            // })
             this.$message({
               message: '修改成功',
               type: 'success'

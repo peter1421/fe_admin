@@ -177,7 +177,6 @@ export default {
       getBooks(this.form).then(res => {
         this.tableData = res.data.results
         this.total = res.data.count
-        console.log(this.tableData)
       })
     },
     // 重置
