@@ -18,7 +18,7 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','system-users-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="addBook()">新增書籍</el-button>
-        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteUsers(form)">删除</el-button>
+        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteBooks(form)">删除</el-button>
         <el-table
           ref="multipleTable"
           :data="tableData"
@@ -68,10 +68,10 @@
           >
             <template slot-scope="{row}">
               <el-button v-permission="['admin','system-users-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateBook(row)" />
-              <el-button v-permission="['admin','system-users-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteUser(row)" />
-              <el-tooltip content="使用者權限" placement="top">
+              <el-button v-permission="['admin','system-users-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteBook(row)" />
+              <!-- <el-tooltip content="使用者權限" placement="top">
                 <el-button v-permission="['admin','system-users-permissions']" type="warning" icon="el-icon-user-solid" size="mini" @click="userPermissions(row)" />
-              </el-tooltip>
+              </el-tooltip> -->
             </template>
           </el-table-column>
         </el-table>
@@ -100,9 +100,9 @@ import addBookForm from './components/addBookForm'
 import cuForm from './components/cuForm'
 import resetPwdForm from './components/resetPwdForm'
 import permissionsDialog from './components/permissionsDialog'
-import { updateUserActive, deleteUser, deleteUsers } from '@/api/system/users'
+import { updateUserActive } from '@/api/system/users'
 import { getDepartments } from '@/api/system/departments'
-import { getBooks } from '@/api/courses/books'
+import { getBooks, deleteBook, deleteBooks } from '@/api/courses/books'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Users',
@@ -208,15 +208,15 @@ export default {
       })
     },
     // 删除用户
-    deleteUser(row) {
-      this.$confirm('此操作将删除用户 "' + row.username + '" , 是否继续？', '提示', {
+    deleteBook(row) {
+      this.$confirm('此操作将删除用户 "' + row.name + '" , 是否继续？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteUser(row.id).then(res => {
+        deleteBook(row.book_id).then(res => {
           this.$message({
-            message: '删除用户' + row.username + '成功',
+            message: '删除用户' + row.name + '成功',
             type: 'success'
           })
           // 刷新table
@@ -233,13 +233,13 @@ export default {
     },
 
     // 批量删除用户
-    deleteUsers() {
+    deleteBooks() {
       this.$confirm('此操作将删除选中用户' + ', 是否继续？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteUsers(this.multipleSelection).then(res => {
+        deleteBooks(this.multipleSelection).then(res => {
           this.$message({
             message: '删除用户成功',
             type: 'success'

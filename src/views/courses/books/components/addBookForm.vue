@@ -42,7 +42,7 @@
   </el-dialog>
 </template>
 <script>
-import { createBook, getBook } from '@/api/courses/books'
+import { createBook, getBook, updateBook } from '@/api/courses/books'
 import { getRoles } from '@/api/system/roles'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
@@ -129,17 +129,13 @@ export default {
       this.saveBook()
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if (this.bookId) {
-            // updateUser(this.bookId, this.bookForm).then(res => {
-            //   this.$message({
-            //     message: '修改成功',
-            //     type: 'success'
-            //   })
-            //   this.search()
-            // })
-            this.$message({
-              message: '修改成功',
-              type: 'success'
+          if (this.curId) {
+            updateBook(this.curId, this.bookForm).then(res => {
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              })
+              this.search()
             })
           } else {
             createBook(this.bookForm).then(res => {
@@ -148,10 +144,6 @@ export default {
                 type: 'success'
               })
               this.search()
-            })
-            this.$message({
-              message: this.bookForm.name + '新增成功',
-              type: 'success'
             })
           }
         } else {

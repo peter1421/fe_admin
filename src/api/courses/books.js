@@ -33,6 +33,24 @@ export function updateBook(id, data) {
     data
   })
 }
+
+// 删除書籍
+export function deleteBook(id) {
+  return request({
+    url: `/courses/books/${id}/`,
+    method: 'delete'
+  })
+}
+
+// 批量删除書籍
+export function deleteBooks(ids) {
+  return request({
+    url: '/courses/books/',
+    method: 'delete',
+    data: { 'ids': ids }
+  })
+}
+
 // // 新增用户
 // export function createUser(data) {
 //   return request({
@@ -42,22 +60,22 @@ export function updateBook(id, data) {
 //   })
 // }
 
-// 删除用户
-export function deleteUser(id) {
-  return request({
-    url: `/system/users/${id}/`,
-    method: 'delete'
-  })
-}
+// // 删除用户
+// export function deleteUser(id) {
+//   return request({
+//     url: `/system/users/${id}/`,
+//     method: 'delete'
+//   })
+// }
 
-// 批量删除用户
-export function deleteUsers(ids) {
-  return request({
-    url: '/system/users/',
-    method: 'delete',
-    data: { 'ids': ids }
-  })
-}
+// // 批量删除用户
+// export function deleteUsers(ids) {
+//   return request({
+//     url: '/system/users/',
+//     method: 'delete',
+//     data: { 'ids': ids }
+//   })
+// }
 
 // 修改用户
 export function updateUser(id, data) {
