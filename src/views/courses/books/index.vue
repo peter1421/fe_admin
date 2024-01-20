@@ -100,8 +100,6 @@ import addBookForm from './components/addBookForm'
 import cuForm from './components/cuForm'
 import resetPwdForm from './components/resetPwdForm'
 import permissionsDialog from './components/permissionsDialog'
-import { updateUserActive } from '@/api/system/users'
-import { getDepartments } from '@/api/system/departments'
 import { getBooks, deleteBook, deleteBooks } from '@/api/courses/books'
 import { mapGetters } from 'vuex'
 export default {
@@ -152,16 +150,10 @@ export default {
   },
   created() {
     this.search()
-    this.getDepartments()
   },
   methods: {
     checkPermission,
     // 获取部门Tree结构
-    getDepartments() {
-      getDepartments().then(res => {
-        this.departmentsData = res.data.results
-      })
-    },
     // 部门Tree过滤方法
     filterNode(value, data) {
       if (!value) return true
@@ -177,6 +169,7 @@ export default {
       getBooks(this.form).then(res => {
         this.tableData = res.data.results
         this.total = res.data.count
+        console.log(this.tableData)
       })
     },
     // 重置
@@ -186,37 +179,17 @@ export default {
       this.form.department_id = ''
       this.search()
     },
-    // 修改用户状态
-    changeIsActive(event, row) {
-      const message = !event ? '锁定' : '激活'
-      this.$confirm('此操作将' + message + '用户 "' + row.username + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        const data = { 'is_active': row.is_active }
-        updateUserActive(row.id, data).then(res => {
-          this.$message({
-            message: message + row.username + '成功',
-            type: 'success'
-          })
-        }).catch(() => {
-          row.is_active = !row.is_active
-        })
-      }).catch(() => {
-        row.is_active = !row.is_active
-      })
-    },
-    // 删除用户
+
+    // 删除書籍
     deleteBook(row) {
-      this.$confirm('此操作将删除用户 "' + row.name + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此動作將刪除書籍: "' + row.name + '" , 是否繼續?', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteBook(row.book_id).then(res => {
           this.$message({
-            message: '删除用户' + row.name + '成功',
+            message: '删除書籍' + row.name + '成功',
             type: 'success'
           })
           // 刷新table
@@ -228,20 +201,20 @@ export default {
     // table选择功能的change事件
     handleSelectionChange() {
       const deleteIds = []
-      this.$refs.multipleTable.selection.forEach(data => deleteIds.push(data.id))
+      this.$refs.multipleTable.selection.forEach(data => deleteIds.push(data.book_id))
       this.multipleSelection = deleteIds
     },
 
-    // 批量删除用户
+    // 大量删除書籍
     deleteBooks() {
-      this.$confirm('此操作将删除选中用户' + ', 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此動作將刪除書籍' + ', 是否繼續?', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteBooks(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除用户成功',
+            message: '删除書籍成功',
             type: 'success'
           })
           // 刷新table
@@ -249,7 +222,7 @@ export default {
         })
       })
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()

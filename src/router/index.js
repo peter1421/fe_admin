@@ -122,6 +122,12 @@ export const asyncRoutes = [
         meta: { title: '書籍列表', icon: 'education', noCache: true }
       },
       {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'system-users',
+        meta: { title: '儀表板', icon: 'user', noCache: true }
+      },
+      {
         path: 'simple',
         component: () => import('@/views/client/simple'),
         name: 'system-users',
