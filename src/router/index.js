@@ -59,12 +59,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/client',
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
+        path: 'client',
+        component: () => import('@/views/client/home/index'),
+        name: 'client',
         meta: { title: '首頁', icon: 'dashboard', affix: true }
       }
     ]
@@ -114,6 +114,18 @@ export const asyncRoutes = [
         component: () => import('@/views/client/chat'),
         name: 'system-users',
         meta: { title: '聊天機器人', icon: 'user', noCache: true }
+      },
+      {
+        path: 'books',
+        component: () => import('@/views/client/books'),
+        name: 'system-users',
+        meta: { title: '書籍列表', icon: 'education', noCache: true }
+      },
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'system-users',
+        meta: { title: '儀表板', icon: 'user', noCache: true }
       },
       {
         path: 'simple',
@@ -187,6 +199,18 @@ export const asyncRoutes = [
         meta: {
           permissions: ['admin', 'system-jobs'],
           title: '任务调度',
+          icon: 'task -2',
+          noCache: true
+        }
+      },
+      // 新增模組
+      {
+        path: 'books',
+        component: () => import('@/views/courses/books'),
+        name: 'system-jobs',
+        meta: {
+          permissions: ['admin', 'system-jobs'],
+          title: '書籍管理',
           icon: 'task -2',
           noCache: true
         }

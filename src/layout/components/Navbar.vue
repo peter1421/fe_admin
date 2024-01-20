@@ -10,18 +10,18 @@
       <div class="navbar-nav ms-auto p-4 p-lg-0">
         <a href="/#/client/home" class="nav-item nav-link">客戶端</a>
         <a href="/#/client/chat" class="nav-item nav-link">聊天</a>
-        <a href="/#/dashboard" class="nav-item nav-link">儀表板</a>
+        <a href="/#/client/dashboard" class="nav-item nav-link">儀表板</a>
         <div class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             data-bs-toggle="dropdown"
-          >可以下拉</a>
+          >其他資料</a>
           <div class="dropdown-menu fade-down m-0">
-            <a href="#" class="dropdown-item">拉拉拉</a>
+            <a href="https://gitmind.com/app/docs/mw42lugd" class="dropdown-item">資料庫設計</a>
             <a href="#" class="dropdown-item">拉拉拉</a>
           </div>
         </div>
-        <a href="/client/contact" class="nav-item nav-link active">會發光的連結</a>
+        <a href="/#/client/books" class="nav-item nav-link active">瀏覽書籍</a>
 
         <a
           href=""
