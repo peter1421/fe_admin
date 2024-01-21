@@ -17,7 +17,7 @@
           class="avatar-status"
         ><i class="ri-checkbox-blank-circle-fill text-success" /></span>
       </div>
-      <h5 class="mb-0">(ID: {{ userId }} - {{ username }})瑜伯伯( {{ bookId }} )-機器人聊天室</h5>
+      <h5 class="mb-0">{{ botData.student.name }} 的 {{ botData.book.name }}-機器人聊天室</h5>
     </div>
 
     <div class="chat-header-icons d-flex">
@@ -69,6 +69,12 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'ChatHeader',
   // props, data, methods...
+  props: {
+    botData: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     ...mapGetters([
       'username',
@@ -80,10 +86,7 @@ export default {
       'gender',
       'userId',
       'chatMessages'
-    ]),
-    bookId() {
-      return this.$route.params.bookId
-    }
+    ])
   }
 }
 </script>
