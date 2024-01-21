@@ -111,7 +111,7 @@ import pandas as pd
         'userId': this.userId,
         'sender': 'user',
         'message': this.newMessage,
-        'bot_id': 0,
+        'student_book_bot_id': 1,
         'chatroom_id': 0
       }
       const userMessage = { sender: messageLog.sender, text: messageLog.message }

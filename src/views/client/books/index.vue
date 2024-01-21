@@ -12,7 +12,7 @@
         </div>
         <div class="row g-4 justify-content-center">
           <div
-            v-for="(course, index) in tableData"
+            v-for="(book, index) in tableData"
             :key="index"
             class="col-lg-4 col-md-6 wow fadeInUp"
             data-wow-delay="0.1s"
@@ -33,30 +33,31 @@
                     href="#"
                     class="flex-shrink-0 btn btn-sm btn-primary px-3"
                     style="border-radius: 0 30px 30px 0"
-                  >Join Now</a>
+                    @click="joinCourse(book.book_id)"
+                  >聊天 {{ book.book_id }} </a>
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
-                <h3 class="mb-0">{{ course.name }}</h3>
+                <h3 class="mb-0">{{ book.name }}</h3>
                 <div class="mb-3">
                   <small class="fa fa-star text-primary" />
                   <small class="fa fa-star text-primary" />
                   <small class="fa fa-star text-primary" />
                   <small class="fa fa-star text-primary" />
                   <small class="fa fa-star text-primary" />
-                  <p> {{ course.description }}</p>
+                  <p> {{ book.description }}</p>
                 </div>
                 <h5 class="mb-4" />
                 <div class="d-flex border-top">
                   <small
                     class="flex-fill text-center border-end py-2"
-                  ><i class="fa fa-user-tie text-primary me-2" />{{ course.difficulty }}</small>
+                  ><i class="fa fa-user-tie text-primary me-2" />{{ book.difficulty }}</small>
                   <small
                     class="flex-fill text-center border-end py-2"
-                  ><i class="fa fa-clock text-primary me-2" />{{ course.category }}</small>
+                  ><i class="fa fa-clock text-primary me-2" />{{ book.category }}</small>
                   <small
                     class="flex-fill text-center py-2"
-                  ><i class="fa fa-user text-primary me-2" />{{ course.author }}</small>
+                  ><i class="fa fa-user text-primary me-2" />{{ book.author }}</small>
                 </div>
               </div>
             <!-- ... 其他代码 ... -->
@@ -72,6 +73,7 @@
 <script>
 import checkPermission from '@/utils/permission'
 import { getBooks } from '@/api/courses/books'
+import { creatStudentBookBot } from '@/api/chatbot/bookbot'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Users',
@@ -87,16 +89,7 @@ export default {
       },
       tableData: [],
       total: 0,
-      multipleSelection: [], // 已选择的用户id数组
-      filterText: '',
-      departmentsData: [],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      },
-      // 以下为cuForm子组件数据
-      cuDialogVisible: false,
-      curId: null
+      filterText: ''
     }
   },
   computed: {
@@ -139,6 +132,22 @@ export default {
       // form中未使用department_id字段需手动清除
       this.form.department_id = ''
       this.search()
+    },
+    joinCourse(book) {
+      const student = this.userId
+      const message = student + '創建機器人: ' + book
+      const data = {
+        student: student,
+        book: book
+      }
+      creatStudentBookBot(data)
+        .then(res => {
+          this.$message({
+            message: message + '成功',
+            type: 'success'
+          })
+          this.search()
+        })
     }
   }
 
