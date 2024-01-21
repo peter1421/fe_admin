@@ -50,6 +50,7 @@ import 'prismjs/themes/prism.css' // 主題樣式
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
 import { mapGetters } from 'vuex'
 import { sendMessage } from '@/api/chatbot/message'
+import { getStudetnBookBot, creatStudentBookBot } from '@/api/chatbot/bookbot'
 import store from '@/store'
 // import { data } from 'vue-echarts'
 
@@ -62,6 +63,9 @@ export default {
   },
   data() {
     return {
+      bot_id: null,
+      student: null,
+      book: null,
       newMessage: '',
       messages: [],
       form: {
@@ -92,6 +96,7 @@ import pandas as pd
       'userId',
       'chatMessages'
     ])
+
   },
   mounted() {
     this.$nextTick(() => {
@@ -99,10 +104,53 @@ import pandas as pd
     })
   },
   created() {
-    this.getMessages()
+    this.init()
+    // this.getMessages()
     this.scrollToBottom()
   },
   methods: {
+    init() {
+      this.student = this.userId
+      this.book = this.$route.params.bookId
+      this.getStudetnBookBot()
+    },
+    getStudetnBookBot() {
+      const params = {
+        student: this.student,
+        book: this.book
+      }
+
+      getStudetnBookBot(params)
+        .then(res => {
+          this.bot_id = res.data.bot_id
+          this.$message({
+            message: `機器人ID: ${this.bot_id} 學生ID: ${this.student} 書籍ID: ${this.book}`,
+            type: 'success'
+          })
+        })
+        .catch(error => {
+          console.error('獲取StudentBookBot失败:', error)
+          this.$message({
+            message: '獲取StudentBookBot失败',
+            type: 'error'
+          })
+        })
+    },
+    creatStudentBookBot() {
+      const message = this.student + '創建機器人: ' + this.book
+      const data = {
+        student: this.student,
+        book: this.book
+      }
+      creatStudentBookBot(data)
+        .then(res => {
+          this.$message({
+            message: message + '成功',
+            type: 'success'
+          })
+          this.search()
+        })
+    },
     sendMessage(message) {
       // TODO:整理成function
       this.newMessage = message

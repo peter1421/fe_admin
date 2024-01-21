@@ -25,16 +25,16 @@
                   class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4"
                 >
                   <a
-                    href="#"
                     class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end"
                     style="border-radius: 30px 0 0 30px"
-                  >Read More</a>
+                    @click="goToChat(book.book_id)"
+                  >聊天</a>
                   <a
                     href="#"
                     class="flex-shrink-0 btn btn-sm btn-primary px-3"
                     style="border-radius: 0 30px 30px 0"
                     @click="joinCourse(book.book_id)"
-                  >聊天 {{ book.book_id }} </a>
+                  >創建機器人 {{ book.book_id }} </a>
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
@@ -148,6 +148,9 @@ export default {
           })
           this.search()
         })
+    },
+    goToChat(bookId) {
+      this.$router.push({ path: `/client/chat/${bookId}` })
     }
   }
 
