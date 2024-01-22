@@ -52,7 +52,7 @@ import { mapGetters } from 'vuex'
 import { getMessages, sendMessage } from '@/api/chatbot/message'
 import { getStudetnBookBot, creatStudentBookBot } from '@/api/chatbot/bookbot'
 import store from '@/store'
-import { data } from 'vue-echarts'
+// import { data } from 'vue-echarts'
 // import { data } from 'vue-echarts'
 
 // TODO:把重複或用不到的變數拿掉
@@ -108,17 +108,13 @@ import pandas as pd
   },
   created() {
     this.init()
-    this.getMessages()
     this.scrollToBottom()
   },
   methods: {
     init() {
       this.student = this.userId
       this.book = this.$route.params.bookId
-      this.getStudetnBookBot().then(() => {
-        console.log('getStudetnBookBot')
-        this.getMessages()
-      })
+      this.getStudetnBookBot()
     },
     getStudetnBookBot() {
       const params = {
@@ -134,7 +130,6 @@ import pandas as pd
             message: `機器人ID: ${this.botId} 學生ID: ${this.student} 書籍ID: ${this.book}`,
             type: 'success'
           })
-          console.log('sadasdasdasd')
         })
         .catch(error => {
           console.error('獲取機器人失败:', error)
@@ -143,6 +138,8 @@ import pandas as pd
             type: 'warning'
           })
           this.creatStudentBookBot()
+        }).finally(() => {
+          this.getMessages()
         })
     },
     creatStudentBookBot() {
@@ -188,14 +185,18 @@ import pandas as pd
       })
     },
     getMessages() {
-      data = {
-        'botId': this.botId
+      const params = {
+        'bot_id': this.botId
       }
       console.log('getMessages')
-      getMessages(data).then((res) => {
+      getMessages(params).then((res) => {
+        // TODO:這裡有鬼 BJ4
         this.messages = []
         this.chatMessages = res.data
-        this.chatMessages.forEach(chatMessage => {
+        // console.log(res)
+        // console.log(res.data)
+        // console.log(this.chatMessages)
+        res.data.forEach(chatMessage => {
           this.messages.push({ sender: chatMessage.sender, text: chatMessage.message })
         })
       })
