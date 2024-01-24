@@ -110,7 +110,7 @@ export const asyncRoutes = [
         meta: { title: '客戶端首頁', icon: 'user', noCache: true }
       },
       {
-        path: 'chat',
+        path: 'chat/:bookId',
         component: () => import('@/views/client/chat'),
         name: 'system-users',
         meta: { title: '聊天機器人', icon: 'user', noCache: true }
@@ -126,6 +126,12 @@ export const asyncRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'system-users',
         meta: { title: '儀表板', icon: 'user', noCache: true }
+      },
+      {
+        path: 'chat',
+        component: () => import('@/views/client/chat'),
+        name: 'system-users',
+        meta: { title: '聊天機器人測試用', icon: 'user', noCache: true }
       },
       {
         path: 'simple',
@@ -390,7 +396,8 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    // routes: constantRoutes
+    routes: [...constantRoutes, ...asyncRoutes] // 包含异步路由
   })
 
 const router = createRouter()

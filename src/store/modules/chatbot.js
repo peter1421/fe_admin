@@ -35,16 +35,11 @@ const actions = {
   },
 
   // Get chat messages
-  getMessages({ commit }) {
+  getMessages({ commit }, { bot_id }) {
     return new Promise((resolve, reject) => {
       commit('CLEAR_MESSAGES')
       getMessages().then(response => {
         const messages = response.data
-        //   messages = [
-        //     {'userId': 1, 'sender': 'bot', 'message': 'Sample Message 1'},
-        //     {'userId': 2, 'sender': 'user', 'message': 'Sample Message 2'}
-        // ]
-        // return Response(messages)
         messages.forEach(message => {
           commit('ADD_MESSAGE', message)
         })

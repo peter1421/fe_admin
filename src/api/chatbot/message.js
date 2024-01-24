@@ -11,10 +11,10 @@ export function sendMessage(data) {
 }
 
 // 取得對話
-export function getMessages(data) {
+export function getMessages(params) {
   return request({
     url: '/chatbot/get-message/',
     method: 'get',
-    data
+    params
   })
 }
