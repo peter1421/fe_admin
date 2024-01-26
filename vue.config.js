@@ -42,7 +42,9 @@ module.exports = {
     },
     proxy: {
       '/dev/api': {
-        target: 'http://127.0.0.1:8769/',
+        target: 'http://0.0.0.0:8769/',
+        // target: 'http://140.115.126.57:8769/',
+        // target: 'http://127.0.0.1:8769/',
         changeOrigin: true,
         pathRewrite: {
           '^/dev/api': ''

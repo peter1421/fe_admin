@@ -162,6 +162,7 @@ import pandas as pd
     },
     sendMessage(message) {
       // TODO:整理成function
+      console.log('sendMessage')
       this.newMessage = message
       if (!this.newMessage) return
       const messageLog = {
@@ -173,6 +174,7 @@ import pandas as pd
       }
       const userMessage = { sender: messageLog.sender, text: messageLog.message }
       this.updateMessages(userMessage)
+      console.log(userMessage)
       sendMessage(messageLog).then(res => {
         this.$message({
           message: '送出成功',
