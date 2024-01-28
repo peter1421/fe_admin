@@ -8,25 +8,9 @@
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
-        <a href="/#/client/home" class="nav-item nav-link">客戶端</a>
         <a href="/#/client/chat" class="nav-item nav-link">聊天</a>
         <a href="/#/client/dashboard" class="nav-item nav-link">儀表板</a>
-        <div class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            data-bs-toggle="dropdown"
-          >其他資料</a>
-          <div class="dropdown-menu fade-down m-0">
-            <a href="https://gitmind.com/app/docs/mw42lugd" class="dropdown-item">資料庫設計</a>
-            <a href="#" class="dropdown-item">拉拉拉</a>
-          </div>
-        </div>
         <a href="/#/client/books" class="nav-item nav-link active">瀏覽書籍</a>
-
-        <a
-          href=""
-          class="btn btn-primary py-4 px-lg-5 d-none d-lg-block"
-        >HI<i class="fa fa-arrow-right ms-3" /></a>
       </div>
     </div>
     <div class="right-menu">
@@ -39,9 +23,8 @@
           <screenfull id="screenfull" class="right-menu-item hover-effect" />
         </el-tooltip>
 
-        <el-tooltip content="页面布局" effect="dark" placement="bottom">
-          <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
+        <!-- <el-tooltip content="页面布局" effect="dark" placement="bottom">
+        </el-tooltip> -->
 
       </template>
 
@@ -52,16 +35,13 @@
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/profile/index">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item>個人中心</el-dropdown-item>
           </router-link>
           <router-link to="/">
             <el-dropdown-item>首頁</el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/TianPangJi/drf_admin/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
           <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">退出</span>
+            <span style="display:block;">登出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -118,7 +98,6 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
 import '../../assets/css/bootstrap.min.css'
 import '../../assets/css/style.css'
@@ -128,7 +107,6 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull,
-    SizeSelect,
     Search
   },
   computed: {

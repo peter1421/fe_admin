@@ -104,12 +104,6 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'home',
-        component: () => import('@/views/client/home'),
-        name: 'system-users',
-        meta: { title: '客戶端首頁', icon: 'user', noCache: true }
-      },
-      {
         path: 'chat/:bookId',
         component: () => import('@/views/client/chat'),
         name: 'system-users',
@@ -126,18 +120,6 @@ export const asyncRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'system-users',
         meta: { title: '儀表板', icon: 'user', noCache: true }
-      },
-      {
-        path: 'chat',
-        component: () => import('@/views/client/chat'),
-        name: 'system-users',
-        meta: { title: '聊天機器人測試用', icon: 'user', noCache: true }
-      },
-      {
-        path: 'simple',
-        component: () => import('@/views/client/simple'),
-        name: 'system-users',
-        meta: { title: '客戶端樣本', icon: 'user', noCache: true }
       }
     ]
   },
@@ -367,10 +349,6 @@ export const asyncRoutes = [
     path: '/git-link',
     component: Layout,
     children: [
-      {
-        path: 'https://github.com/TianPangJi/drf_admin',
-        meta: { title: 'Git', icon: 'github' }
-      }
     ]
   },
 
@@ -379,12 +357,7 @@ export const asyncRoutes = [
     path: '/icon',
     component: Layout,
     children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
-      }
+
     ]
   },
 

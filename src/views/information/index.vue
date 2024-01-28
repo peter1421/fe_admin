@@ -21,11 +21,11 @@
               </div>
             </div>
             <ul class="user-info">
-              <li><div style="height: 100%"><svg-icon icon-class="login" /> 登录账号<div class="user-right">{{ username }}</div></div></li>
-              <li><svg-icon icon-class="user1" /> 用户姓名 <div class="user-right">{{ name }}</div></li>
-              <li><svg-icon icon-class="dept" /> 所属部门 <div class="user-right"> {{ department }}</div></li>
-              <li><svg-icon icon-class="phone" /> 手机号码 <div class="user-right">{{ mobile }}</div></li>
-              <li><svg-icon icon-class="email" /> 用户邮箱 <div class="user-right">{{ email }}</div></li>
+              <li><div style="height: 100%"><svg-icon icon-class="login" /> 登錄帳號<div class="user-right">{{ username }}</div></div></li>
+              <li><svg-icon icon-class="user1" /> 用戶姓名 <div class="user-right">{{ name }}</div></li>
+              <li><svg-icon icon-class="dept" /> 年級 <div class="user-right"> {{ department }}</div></li>
+              <li><svg-icon icon-class="phone" /> 手機號碼 <div class="user-right">{{ mobile }}</div></li>
+              <li><svg-icon icon-class="email" /> 信箱 <div class="user-right">{{ email }}</div></li>
               <li>
                 <svg-icon icon-class="anq" /> 安全设置
                 <div class="user-right">
