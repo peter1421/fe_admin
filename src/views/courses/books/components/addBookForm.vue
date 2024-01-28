@@ -32,6 +32,7 @@
           <el-option label="簡單" value="easy" />
           <el-option label="中等" value="medium" />
           <el-option label="困難" value="hard" />
+          <el-option label="試試看" value="try" />
         </el-select>
       </el-form-item>
       <el-form-item>

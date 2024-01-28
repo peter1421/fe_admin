@@ -29,12 +29,6 @@
                     style="border-radius: 30px 0 0 30px"
                     @click="goToChat(book.book_id)"
                   >聊天</a>
-                  <a
-                    href="#"
-                    class="flex-shrink-0 btn btn-sm btn-primary px-3"
-                    style="border-radius: 0 30px 30px 0"
-                    @click="joinCourse(book.book_id)"
-                  >創建機器人 {{ book.book_id }} </a>
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
