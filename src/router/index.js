@@ -104,6 +104,12 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'home',
+        component: () => import('@/views/client/home'),
+        name: 'system-users',
+        meta: { title: '客戶端首頁', icon: 'user', noCache: true }
+      },
+      {
         path: 'chat/:bookId',
         component: () => import('@/views/client/chat'),
         name: 'system-users',
