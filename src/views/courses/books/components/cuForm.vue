@@ -77,7 +77,7 @@ export default {
       rolesData: [],
       rules: {
         username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' }],
+        // mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' }],
         email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
       }
     }
