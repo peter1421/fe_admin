@@ -65,7 +65,7 @@ export default {
     }
   },
   created() {
-    // 获取用户名密码等Cookie
+    // 獲取用戶名密碼等Cookie
     this.getCookie()
   },
   methods: {
@@ -73,7 +73,7 @@ export default {
       const username = Cookies.get('username')
       let password = Cookies.get('password')
       const rememberMe = Cookies.get('rememberMe')
-      // 保存cookie里面的加密后的密码
+      // 保存cookie裡面的加密後的密碼
       this.cookiePass = password === undefined ? '' : password
       password = password === undefined ? this.loginForm.password : password
       this.loginForm = {

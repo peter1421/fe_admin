@@ -1,13 +1,13 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" title="修改密码" width="500px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" title="修改密碼" width="500px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="旧密码" prop="old_password">
+      <el-form-item label="舊密碼" prop="old_password">
         <el-input v-model="ruleForm.old_password" type="password" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="新密码" prop="password">
+      <el-form-item label="新密碼" prop="password">
         <el-input v-model="ruleForm.password" type="password" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="确认密码" prop="confirm_password">
+      <el-form-item label="確認密碼" prop="confirm_password">
         <el-input v-model="ruleForm.confirm_password" type="password" clearable autocomplete="off" />
       </el-form-item>
       <el-form-item>
@@ -27,12 +27,12 @@ export default {
     const confirmPass = (rule, value, callback) => {
       if (value) {
         if (this.ruleForm.password !== value) {
-          callback(new Error('两次输入的密码不一致'))
+          callback(new Error('兩次輸入的密碼不一致'))
         } else {
           callback()
         }
       } else {
-        callback(new Error('请再次输入密码'))
+        callback(new Error('請再次輸入密碼'))
       }
     }
     return {
@@ -44,11 +44,11 @@ export default {
       },
       rules: {
         old_password: [
-          { required: true, message: '请输入旧密码', trigger: 'blur' }
+          { required: true, message: '請輸入舊密碼', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '请输入新密码', trigger: 'blur' },
-          { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
+          { required: true, message: '請輸入新密碼', trigger: 'blur' },
+          { min: 6, max: 20, message: '長度在 6 到 20 個字符', trigger: 'blur' }
         ],
         confirm_password: [
           { required: true, validator: confirmPass, trigger: 'blur' }
@@ -61,18 +61,18 @@ export default {
       this.$refs.ruleForm.resetFields()
       this.dialogVisible = false
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           changePassword(this.ruleForm).then(res => {
             this.$message({
-              message: '密码修改成功，请重新登录',
+              message: '密碼修改成功，請重新登錄',
               type: 'success'
             })
             setTimeout(() => {
               store.dispatch('user/logout').then(() => {
-                location.reload() // 为了重新实例化vue-router对象 避免bug
+                location.reload() // 為了重新實例化vue-router對象 避免bug
               })
             }, 1500)
           })
@@ -81,7 +81,7 @@ export default {
         }
       })
     },
-    // 重置表单
+    // 重置表單
     resetForm(formName) {
       this.$refs[formName].resetFields()
     }

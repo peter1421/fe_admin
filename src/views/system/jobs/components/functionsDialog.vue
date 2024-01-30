@@ -1,10 +1,10 @@
 <template>
-  <el-dialog title="函数清单" :visible.sync="functionDialogVisible" :before-close="close">
+  <el-dialog title="函數清單" :visible.sync="functionDialogVisible" :before-close="close">
     <el-table :data="tableData">
-      <el-table-column property="name" label="函数名称" />
+      <el-table-column property="name" label="函數名稱" />
       <el-table-column property="desc" label="功能描述" />
     </el-table>
-    <!--分页组件-->
+    <!--分頁組件-->
     <el-pagination
       :current-page="1"
       :page-sizes="[10, 20, 50, 100]"
@@ -51,7 +51,7 @@ export default {
       this.form = this.$options.data().form
       this.$emit('functionDialogClose')
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()

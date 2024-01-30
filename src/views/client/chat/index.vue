@@ -82,7 +82,7 @@ import pandas as pd
       tableData: [],
       isAllSelect: false,
       multipleSelection: [],
-      // cuForm数据
+      // cuForm數據
       cuDialogVisible: false,
       curId: null
     }
@@ -132,7 +132,7 @@ import pandas as pd
           })
         })
         .catch(error => {
-          console.error('獲取機器人失败:', error)
+          console.error('獲取機器人失敗:', error)
           this.$message({
             message: '獲取機器人失敗，正在為您創造新的機器人',
             type: 'warning'

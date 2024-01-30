@@ -4,7 +4,7 @@
       <el-col :span="17">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入IP搜索" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入IP搜索" />
           </el-form-item>
           <el-form-item>
             <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
@@ -12,14 +12,14 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','monitor-ip-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createIp()">新增</el-button>
-        <el-button v-permission="['admin','monitor-ip-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteIps(form)">删除</el-button>
+        <el-button v-permission="['admin','monitor-ip-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteIps(form)">刪除</el-button>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>IP黑名单</span>
+            <span>IP黑名單</span>
           </div>
           <el-table
             ref="multipleTable"
@@ -38,7 +38,7 @@
             />
             <el-table-column
               prop="create_time"
-              label="创建时间"
+              label="創建時間"
             />
             <el-table-column
               fixed="right"
@@ -47,12 +47,12 @@
               width="220"
             >
               <template slot-scope="{row}">
-                <el-button v-permission="['admin','monitor-ip-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateIp(row)">编辑</el-button>
-                <el-button v-permission="['admin','monitor-ip-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteIp(row)">删除</el-button>
+                <el-button v-permission="['admin','monitor-ip-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateIp(row)">編輯</el-button>
+                <el-button v-permission="['admin','monitor-ip-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteIp(row)">刪除</el-button>
               </template>
             </el-table-column>
           </el-table>
-          <!--分页组件-->
+          <!--分頁組件-->
           <el-pagination
             :current-page="1"
             :page-sizes="[10, 20, 50, 100]"
@@ -84,7 +84,7 @@ export default {
       tableData: [],
       total: 0,
       multipleSelection: [],
-      // cuForm数据
+      // cuForm數據
       cuDialogVisible: false,
       curId: null
     }
@@ -93,7 +93,7 @@ export default {
     this.search()
   },
   methods: {
-    // 获取角色列表/搜索功能
+    // 獲取角色列表/搜索功能
     search() {
       getIps(this.form).then(res => {
         this.tableData = res.data.results
@@ -105,22 +105,22 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // table选择框功能的change事件
+    // table選擇框功能的change事件
     handleSelectionChange() {
       const deleteIds = []
       this.$refs.multipleTable.selection.forEach(data => deleteIds.push(data.id))
       this.multipleSelection = deleteIds
     },
-    // 删除IP
+    // 刪除IP
     deleteIp(row) {
-      this.$confirm('此操作将从黑名单中移除该IP, 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將從黑名單中移除該IP, 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteIp(row.id).then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -128,16 +128,16 @@ export default {
         })
       })
     },
-    // 批量删除IP
+    // 批量刪除IP
     deleteIps() {
-      this.$confirm('此操作将从黑名单中移除选中IP' + ', 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將從黑名單中移除選中IP' + ', 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteIps(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -145,7 +145,7 @@ export default {
         })
       })
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()
@@ -154,7 +154,7 @@ export default {
       this.form.page = val
       this.search()
     },
-    // cuForm子组件
+    // cuForm子組件
     createIp() {
       this.cuDialogVisible = true
     },

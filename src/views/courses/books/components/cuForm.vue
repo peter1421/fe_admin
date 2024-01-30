@@ -76,9 +76,9 @@ export default {
       },
       rolesData: [],
       rules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        // mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号' }],
-        email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
+        username: [{ required: true, trigger: 'blur', message: '用戶名不能為空' }],
+        // mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '請輸入正確的手機號' }],
+        email: [{ type: 'email', message: '請輸入正確的郵箱地址', trigger: ['blur', 'change'] }]
       }
     }
   },
@@ -86,7 +86,7 @@ export default {
     dialogVisible(v) {
       if (v) {
         if (this.curId) {
-          // 编辑
+          // 編輯
         // this.$nextTick(() => {
         //   getUser(this.curId).then(res => {
         //     this.ruleForm = res.data
@@ -114,7 +114,7 @@ export default {
         this.rolesData = res.data.results
       })
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -132,7 +132,7 @@ export default {
           } else {
             createUser(this.ruleForm).then(res => {
               this.$message({
-                message: '新增成功, 默认密码123456',
+                message: '新增成功, 默認密碼123456',
                 type: 'success'
               })
               this.search()

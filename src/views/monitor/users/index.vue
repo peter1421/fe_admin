@@ -4,7 +4,7 @@
       <el-col>
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入用户名或IP搜索" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入用戶名或IP搜索" />
           </el-form-item>
           <el-form-item>
             <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
@@ -22,7 +22,7 @@
           />
           <el-table-column
             prop="username"
-            label="用户名"
+            label="用戶名"
           />
           <el-table-column
             prop="name"
@@ -30,22 +30,22 @@
           />
           <el-table-column
             prop="ip"
-            label="登录IP"
+            label="登錄IP"
             width="130"
           />
           <el-table-column
             prop="browser"
-            label="浏览器"
+            label="瀏覽器"
             width="180"
           />
           <el-table-column
             prop="os"
-            label="系统"
+            label="系統"
             width="180"
           />
           <el-table-column
             prop="last_time"
-            label="最后操作时间"
+            label="最後操作時間"
             width="180"
           />
           <el-table-column
@@ -55,12 +55,12 @@
             width="220"
           >
             <template slot-scope="{row}">
-              <el-button v-permission="['admin','monitor-users-lock']" type="primary" icon="el-icon-edit" size="mini" @click="lockUser(row)">锁定</el-button>
+              <el-button v-permission="['admin','monitor-users-lock']" type="primary" icon="el-icon-edit" size="mini" @click="lockUser(row)">鎖定</el-button>
               <el-button v-permission="['admin','monitor-users-black-ip']" type="danger" icon="el-icon-delete" size="mini" @click="blackIP(row)">拉黑IP</el-button>
             </template>
           </el-table-column>
         </el-table>
-        <!--分页组件-->
+        <!--分頁組件-->
         <el-pagination
           :current-page="1"
           :page-sizes="[10, 20, 50, 100]"
@@ -96,7 +96,7 @@ export default {
     this.search()
   },
   methods: {
-    // 获取用户列表/搜索功能
+    // 獲取用戶列表/搜索功能
     search() {
       getUsers(this.form).then(res => {
         this.tableData = res.data.results
@@ -108,17 +108,17 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // 锁定用户
+    // 鎖定用戶
     lockUser(row) {
-      this.$confirm('此操作将锁定用户 "' + row.username + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將鎖定用戶 "' + row.username + '" , 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         const data = { 'is_active': false }
         updateUserActive(row.id, data).then(res => {
           this.$message({
-            message: '锁定' + row.username + '成功',
+            message: '鎖定' + row.username + '成功',
             type: 'success'
           })
         })
@@ -126,8 +126,8 @@ export default {
     },
     // 拉黑IP
     blackIP(row) {
-      this.$confirm('此操作将拉黑IP "' + row.ip + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將拉黑IP "' + row.ip + '" , 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
@@ -139,7 +139,7 @@ export default {
         })
       })
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()

@@ -9,7 +9,7 @@
           <div>
             <div style="text-align: center">
               <div class="el-upload">
-                <img :src="avatar" title="点击上传头像" class="avatar" @click="toggleShow">
+                <img :src="avatar" title="點擊上傳頭像" class="avatar" @click="toggleShow">
                 <myUpload
                   v-model="show"
                   :headers="headers"
@@ -27,9 +27,9 @@
               <li><svg-icon icon-class="phone" /> 手機號碼 <div class="user-right">{{ mobile }}</div></li>
               <li><svg-icon icon-class="email" /> 信箱 <div class="user-right">{{ email }}</div></li>
               <li>
-                <svg-icon icon-class="anq" /> 安全设置
+                <svg-icon icon-class="anq" /> 安全設置
                 <div class="user-right">
-                  <a @click="$refs.pass.dialogVisible = true">修改密码</a>
+                  <a @click="$refs.pass.dialogVisible = true">修改密碼</a>
                 </div>
               </li>
             </ul>
@@ -45,13 +45,13 @@
             <el-form ref="form" :rules="rules" :model="form" label-width="80px">
               <el-form-item label="姓名" prop="name">
                 <el-input v-model="form.name" style="width: 40%" />
-                <span style="color: #C0C0C0;margin-left: 10px;">用户真实姓名或昵称</span>
+                <span style="color: #C0C0C0;margin-left: 10px;">用戶真實姓名或暱稱</span>
               </el-form-item>
-              <el-form-item label="手机号" prop="mobile">
+              <el-form-item label="手機號" prop="mobile">
                 <el-input v-model="form.mobile" style="width: 40%" />
-                <span style="color: #C0C0C0;margin-left: 10px;">手机号可用于登录使用</span>
+                <span style="color: #C0C0C0;margin-left: 10px;">手機號可用於登錄使用</span>
               </el-form-item>
-              <el-form-item label="邮箱" prop="email">
+              <el-form-item label="郵箱" prop="email">
                 <el-input v-model="form.email" style="width: 40%" />
               </el-form-item>
               <el-form-item label="性別" prop="gender">
@@ -88,7 +88,7 @@ export default {
       form: {},
       rules: {
         name: [
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+          { min: 2, max: 20, message: '長度在 2 到 20 個字符', trigger: 'blur' }
         ],
         email: [
           { validator: validateEMail, trigger: 'blur' }
@@ -119,7 +119,7 @@ export default {
     toggleShow() {
       this.show = !this.show
     },
-    // 头像上传成功的回调
+    // 頭像上傳成功的回調
     cropUploadSuccess() {
       store.dispatch('user/getInfo').then(() => {})
     },

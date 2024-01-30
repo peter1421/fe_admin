@@ -49,8 +49,8 @@ export default {
       this.chart.setOption({
         tooltip: {
           trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          axisPointer: { // 坐標軸指示器，坐標軸觸發有效
+            type: 'shadow' // 默認為直線，可選為：'line' | 'shadow'
           }
         },
         grid: {

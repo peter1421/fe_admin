@@ -1,15 +1,15 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :title="curId ? '编辑部门' : '新增部门'" width="700px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯部門' : '新增部門'" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="部门" prop="name">
+      <el-form-item label="部門" prop="name">
         <el-input v-model="ruleForm.name" clearable />
       </el-form-item>
-      <el-form-item label="父部门" prop="pid">
+      <el-form-item label="父部門" prop="pid">
         <treeselect
           v-model="ruleForm.pid"
           :options="departments"
           style="width: 178px"
-          placeholder="选择父部门"
+          placeholder="選擇父部門"
         />
       </el-form-item>
       <el-form-item>
@@ -50,7 +50,7 @@ export default {
         pid: null
       },
       rules: {
-        name: [{ required: true, trigger: 'blur', message: '部门名不能为空' }]
+        name: [{ required: true, trigger: 'blur', message: '部門名不能為空' }]
       }
     }
   },
@@ -74,7 +74,7 @@ export default {
       this.close()
       this.$emit('search')
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

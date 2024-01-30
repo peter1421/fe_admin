@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form ref="form" :model="form" inline>
       <el-form-item prop="search">
-        <el-input v-model="form.search" clearable style="width:320px" prefix-icon="el-icon-search" placeholder="输入服务器名称、编号、IP搜索" />
+        <el-input v-model="form.search" clearable style="width:320px" prefix-icon="el-icon-search" placeholder="輸入服務器名稱、編號、IP搜索" />
       </el-form-item>
       <el-form-item prop="asset_status">
-        <el-select v-model="form.asset_status" style="width:120px" clearable placeholder="状态">
+        <el-select v-model="form.asset_status" style="width:120px" clearable placeholder="狀態">
           <el-option
             v-for="item in statusOptions"
             :key="item.value"
@@ -20,7 +20,7 @@
       </el-form-item>
     </el-form>
     <el-button v-permission="['admin','cmdb-servers-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createServer()">新增</el-button>
-    <el-button v-permission="['admin','cmdb-servers-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteServers(form)">删除</el-button>
+    <el-button v-permission="['admin','cmdb-servers-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteServers(form)">刪除</el-button>
     <el-table
       ref="table"
       :data="tableData"
@@ -35,43 +35,43 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="所在机房">
+            <el-form-item label="所在機房">
               <span>{{ props.row.idc }}</span>
             </el-form-item>
-            <el-form-item label="所在机柜">
+            <el-form-item label="所在機櫃">
               <span>{{ props.row.cabinet_display }}</span>
             </el-form-item>
             <el-form-item label="用途">
               <span>{{ props.row.server.use }}</span>
             </el-form-item>
-            <el-form-item label="备注">
+            <el-form-item label="備注">
               <span>{{ props.row.memo }}</span>
             </el-form-item>
-            <el-form-item label="系统类型">
+            <el-form-item label="系統類型">
               <span>{{ props.row.server.server_system_type_display }}</span>
             </el-form-item>
-            <el-form-item label="系统版本">
+            <el-form-item label="系統版本">
               <span>{{ props.row.server.model }}</span>
             </el-form-item>
-            <el-form-item label="用户">
+            <el-form-item label="用戶">
               <span v-for="(item,index) in props.row.server.accounts" :key="item.id">{{ index+1 }}、{{ item.username }}/{{ item.password }}/{{ item.port }}   </span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column
-        label="服务器名称"
+        label="服務器名稱"
         prop="name"
         min-width="100"
         show-overflow-tooltip
       />
       <el-table-column
-        label="设备编号"
+        label="設備編號"
         prop="sn"
         show-overflow-tooltip
       />
       <el-table-column
-        label="类型"
+        label="類型"
         prop="server.server_type_display"
         show-overflow-tooltip
       >
@@ -81,12 +81,12 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="系统"
+        label="系統"
         prop="server.server_system_type_display"
         show-overflow-tooltip
       />
       <el-table-column
-        label="服务器状态"
+        label="服務器狀態"
         min-width="100"
         show-overflow-tooltip
       >
@@ -104,12 +104,12 @@
         show-overflow-tooltip
       />
       <el-table-column
-        label="管理员"
+        label="管理員"
         prop="admin_display"
         show-overflow-tooltip
       />
       <el-table-column
-        label="到期时间"
+        label="到期時間"
         prop="expire_day"
         show-overflow-tooltip
       />
@@ -120,12 +120,12 @@
         width="200"
       >
         <template slot-scope="{row}">
-          <el-button v-permission="['admin','cmdb-servers-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateServer(row)">编辑</el-button>
-          <el-button v-permission="['admin','cmdb-servers-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteServer(row)">删除</el-button>
+          <el-button v-permission="['admin','cmdb-servers-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateServer(row)">編輯</el-button>
+          <el-button v-permission="['admin','cmdb-servers-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteServer(row)">刪除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <!--分页组件-->
+    <!--分頁組件-->
     <el-pagination
       :current-page="1"
       :page-sizes="[10, 20, 50, 100]"
@@ -158,7 +158,7 @@ export default {
       total: 0,
       statusOptions: [],
       multipleSelection: [],
-      // cuForm数据
+      // cuForm數據
       cuDialogVisible: false,
       curId: null
     }
@@ -168,14 +168,14 @@ export default {
     this.getAssetsStatus()
   },
   methods: {
-    // 获取服务器列表/搜索功能
+    // 獲取服務器列表/搜索功能
     search() {
       getServers(this.form).then(res => {
         this.tableData = res.data.results
         this.total = res.data.count
       })
     },
-    // 获取服务器资产状态列表
+    // 獲取服務器資產狀態列表
     getAssetsStatus() {
       getAssetsStatus().then(res => {
         this.statusOptions = res.data.results
@@ -186,16 +186,16 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // 删除服务器
+    // 刪除服務器
     deleteServer(row) {
-      this.$confirm('此操作将删除该服务器, 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除該服務器, 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteServer(row.id).then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -203,16 +203,16 @@ export default {
         })
       })
     },
-    // 批量删除服务器
+    // 批量刪除服務器
     deleteServers() {
-      this.$confirm('此操作将删除选中服务器, 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除選中服務器, 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteServers(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -220,13 +220,13 @@ export default {
         })
       })
     },
-    // 选项改变时触发
+    // 選項改變時觸發
     handleSelectionChange(val) {
       const deleteIds = []
       this.$refs.table.selection.forEach(data => deleteIds.push(data.id))
       this.multipleSelection = deleteIds
     },
-    // cuForm子组件
+    // cuForm子組件
     createServer() {
       this.cuDialogVisible = true
     },
@@ -238,7 +238,7 @@ export default {
       this.cuDialogVisible = false
       this.curId = null
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()

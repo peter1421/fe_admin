@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :title="curId ? '编辑角色' : '新增角色'" width="700px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯角色' : '新增角色'" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-form-item label="角色" prop="name">
         <el-input v-model="ruleForm.name" clearable autocomplete="off" />
@@ -36,7 +36,7 @@ export default {
         desc: ''
       },
       rules: {
-        name: [{ required: true, trigger: 'blur', message: '角色名不能为空' }]
+        name: [{ required: true, trigger: 'blur', message: '角色名不能為空' }]
       }
     }
   },
@@ -60,7 +60,7 @@ export default {
       this.close()
       this.$emit('search')
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

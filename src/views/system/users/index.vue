@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row>
       <el-col :span="4">
-        <el-input v-model="filterText" clearable style="width:90%; margin-bottom: 20px;" prefix-icon="el-icon-search" placeholder="输入班級名稱搜搜尋" />
+        <el-input v-model="filterText" clearable style="width:90%; margin-bottom: 20px;" prefix-icon="el-icon-search" placeholder="輸入班級名稱搜搜尋" />
         <el-tree
           ref="tree"
           class="filter-tree"
@@ -16,7 +16,7 @@
       <el-col :span="20">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入學生名稱、手機號碼、電子郵件搜尋" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入學生名稱、手機號碼、電子郵件搜尋" />
           </el-form-item>
           <el-form-item prop="is_active">
             <el-select v-model="form.is_active" style="width:100px" clearable placeholder="狀態">
@@ -30,7 +30,7 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','system-users-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createUser()">新增</el-button>
-        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteUsers(form)">删除</el-button>
+        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteUsers(form)">刪除</el-button>
         <el-table
           ref="multipleTable"
           :data="tableData"
@@ -104,7 +104,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <!--分页组件-->
+        <!--分頁組件-->
         <el-pagination
           :current-page="1"
           :page-sizes="[10, 20, 50, 100]"
@@ -145,19 +145,19 @@ export default {
       },
       tableData: [],
       total: 0,
-      multipleSelection: [], // 已选择的用户id数组
+      multipleSelection: [], // 已選擇的用戶id數組
       filterText: '',
       departmentsData: [],
       defaultProps: {
         children: 'children',
         label: 'label'
       },
-      // 以下为cuForm子组件数据
+      // 以下為cuForm子組件數據
       cuDialogVisible: false,
       curId: null,
-      // 以下为resetPwdForm子组件数据
+      // 以下為resetPwdForm子組件數據
       resetPassDialogVisible: false,
-      // permissionsDialog子组件
+      // permissionsDialog子組件
       permissionsDialogVisible: false
     }
   },
@@ -177,23 +177,23 @@ export default {
   },
   methods: {
     checkPermission,
-    // 获取部门Tree结构
+    // 獲取部門Tree結構
     getDepartments() {
       getDepartments().then(res => {
         this.departmentsData = res.data.results
       })
     },
-    // 部门Tree过滤方法
+    // 部門Tree過濾方法
     filterNode(value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    // 过滤部门下的用户列表
+    // 過濾部門下的用戶列表
     handleNodeClick(data) {
       this.form.department_id = data.id
       this.search()
     },
-    // 获取用户列表/搜索功能
+    // 獲取用戶列表/搜索功能
     search() {
       getUsers(this.form).then(res => {
         this.tableData = res.data.results
@@ -203,15 +203,15 @@ export default {
     // 重置
     resetForm() {
       this.$refs.form.resetFields()
-      // form中未使用department_id字段需手动清除
+      // form中未使用department_id字段需手動清除
       this.form.department_id = ''
       this.search()
     },
-    // 修改用户状态
+    // 修改用戶狀態
     changeIsActive(event, row) {
-      const message = !event ? '锁定' : '激活'
-      this.$confirm('此操作将' + message + '用户 "' + row.username + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      const message = !event ? '鎖定' : '激活'
+      this.$confirm('此操作將' + message + '用戶 "' + row.username + '" , 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
@@ -228,16 +228,16 @@ export default {
         row.is_active = !row.is_active
       })
     },
-    // 删除用户
+    // 刪除用戶
     deleteUser(row) {
-      this.$confirm('此操作将删除用户 "' + row.username + '" , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除用戶 "' + row.username + '" , 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteUser(row.id).then(res => {
           this.$message({
-            message: '删除用户' + row.username + '成功',
+            message: '刪除用戶' + row.username + '成功',
             type: 'success'
           })
           // 刷新table
@@ -246,23 +246,23 @@ export default {
       })
     },
 
-    // table选择功能的change事件
+    // table選擇功能的change事件
     handleSelectionChange() {
       const deleteIds = []
       this.$refs.multipleTable.selection.forEach(data => deleteIds.push(data.id))
       this.multipleSelection = deleteIds
     },
 
-    // 批量删除用户
+    // 批量刪除用戶
     deleteUsers() {
-      this.$confirm('此操作将删除选中用户' + ', 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除選中用戶' + ', 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteUsers(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除用户成功',
+            message: '刪除用戶成功',
             type: 'success'
           })
           // 刷新table
@@ -270,7 +270,7 @@ export default {
         })
       })
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()
@@ -279,7 +279,7 @@ export default {
       this.form.page = val
       this.search()
     },
-    // cuForm子组件
+    // cuForm子組件
     createUser() {
       this.cuDialogVisible = true
     },
@@ -291,7 +291,7 @@ export default {
       this.cuDialogVisible = false
       this.curId = null
     },
-    // 重置密码子组件
+    // 重置密碼子組件
     resetPass(row) {
       this.resetPassDialogVisible = true
       this.curId = row.id
@@ -300,7 +300,7 @@ export default {
       this.resetPassDialogVisible = false
       this.curId = null
     },
-    // 用户权限组件
+    // 用戶權限組件
     userPermissions(row) {
       this.permissionsDialogVisible = true
       this.curId = row.id

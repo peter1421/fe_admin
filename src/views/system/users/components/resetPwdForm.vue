@@ -1,10 +1,10 @@
 <template>
-  <el-dialog :visible.sync="resetPassDialogVisible" title="重置密码" width="700px" :before-close="close">
+  <el-dialog :visible.sync="resetPassDialogVisible" title="重置密碼" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="密码" prop="password">
+      <el-form-item label="密碼" prop="password">
         <el-input v-model="ruleForm.password" type="password" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="确认密码" prop="confirm_password">
+      <el-form-item label="確認密碼" prop="confirm_password">
         <el-input v-model="ruleForm.confirm_password" type="password" autocomplete="off" />
       </el-form-item>
       <el-form-item>
@@ -38,7 +38,7 @@ export default {
     }
     var validatePass2 = (rule, value, callback) => {
       if (value !== this.ruleForm.password) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error('兩次輸入密碼不一致!'))
       } else {
         callback()
       }
@@ -50,11 +50,11 @@ export default {
       },
       rules: {
         password: [
-          { required: true, trigger: 'blur', message: '请输入密码' },
+          { required: true, trigger: 'blur', message: '請輸入密碼' },
           { validator: validatePass, trigger: 'blur' }
         ],
         confirm_password: [
-          { required: true, trigger: 'blur', message: '请再次输入密码' },
+          { required: true, trigger: 'blur', message: '請再次輸入密碼' },
           { validator: validatePass2, trigger: 'blur' }
         ]
       }
@@ -65,7 +65,7 @@ export default {
       this.$refs.ruleForm.resetFields()
       this.$emit('resetClose')
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

@@ -1,20 +1,20 @@
 <template>
-  <el-dialog title="执行记录" :visible.sync="executionDialogVisible" :before-close="close">
+  <el-dialog title="執行記錄" :visible.sync="executionDialogVisible" :before-close="close">
     <el-table :data="tableData">
-      <el-table-column property="status" label="状态" width="150" />
-      <el-table-column property="run_time" label="执行时间" width="200" />
-      <el-table-column property="duration" label="耗时(s)" />
-      <el-table-column property="exception" label="异常" show-overflow-tooltip />
-      <el-table-column label="详情回溯">
+      <el-table-column property="status" label="狀態" width="150" />
+      <el-table-column property="run_time" label="執行時間" width="200" />
+      <el-table-column property="duration" label="耗時(s)" />
+      <el-table-column property="exception" label="異常" show-overflow-tooltip />
+      <el-table-column label="詳情回溯">
         <template slot-scope="{row}">
-          <el-link v-if="row.traceback" type="danger" @click="details(row)">详情回溯</el-link>
-          <el-dialog append-to-body title="详情回溯" :visible.sync="detailsDialogVisible">
+          <el-link v-if="row.traceback" type="danger" @click="details(row)">詳情回溯</el-link>
+          <el-dialog append-to-body title="詳情回溯" :visible.sync="detailsDialogVisible">
             <pre class="details">{{ errorDetails }}</pre>
           </el-dialog>
         </template>
       </el-table-column>
     </el-table>
-    <!--分页组件-->
+    <!--分頁組件-->
     <el-pagination
       :current-page="1"
       :page-sizes="[10, 20, 50, 100]"
@@ -75,12 +75,12 @@ export default {
         this.total = res.data.count
       })
     },
-    // 详情回溯Dialog
+    // 詳情回溯Dialog
     details(row) {
       this.errorDetails = row.traceback
       this.detailsDialogVisible = true
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()
