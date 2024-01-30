@@ -25,33 +25,30 @@
                   class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4"
                 >
                   <a
-                    class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end"
-                    style="border-radius: 30px 0 0 30px"
+                    class="flex-shrink-0 btn btn-sm btn-primary px-3"
+                    style="width :40%;border-radius: 20px;font-size: 120%;"
                     @click="goToChat(book.book_id)"
                   >聊天</a>
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
-                <h3 class="mb-0">{{ book.name }}</h3>
-                <div class="mb-3">
-                  <small class="fa fa-star text-primary" />
-                  <small class="fa fa-star text-primary" />
-                  <small class="fa fa-star text-primary" />
-                  <small class="fa fa-star text-primary" />
-                  <small class="fa fa-star text-primary" />
-                  <p> {{ book.description }}</p>
+                <div style="height: 400px; display: flex; flex-direction: column;">
+                  <h3 class="mb-0" style="flex:0 1 auto">{{ book.name }}</h3>
+                  <hr>
+                  <div class="mb-3" style="flex: 1 1 auto;overflow: hidden;">
+                    <p style="overflow: hidden; text-overflow: ellipsis; width: 100%;"> {{ book.description }}</p>
+                  </div>
                 </div>
-                <h5 class="mb-4" />
                 <div class="d-flex border-top">
                   <small
-                    class="flex-fill text-center border-end py-2"
-                  ><i class="fa fa-user-tie text-primary me-2" />{{ book.difficulty }}</small>
+                    class="text-center border-end py-2 flex-grow-1"
+                  ><i class="fa fa-user-tie text-primary me-2" style="overflow: hidden;" />{{ book.difficulty }}</small>
                   <small
-                    class="flex-fill text-center border-end py-2"
-                  ><i class="fa fa-clock text-primary me-2" />{{ book.category }}</small>
+                    class="text-center border-end py-2 flex-grow-1"
+                  ><i class="fa fa-clock text-primary me-2" style="overflow: hidden;" />{{ book.category }}</small>
                   <small
-                    class="flex-fill text-center py-2"
-                  ><i class="fa fa-user text-primary me-2" />{{ book.author }}</small>
+                    class="text-center py-2 flex-grow-1"
+                  ><i class="fa fa-user text-primary me-2" style="overflow: hidden; text-overflow: ellipsis;" />{{ book.author }}</small>
                 </div>
               </div>
             <!-- ... 其他代码 ... -->

@@ -4,7 +4,7 @@
   >
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /><!--不知道哪裡生出文字的，但是點擊首頁會出錯-->
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <div class="navbar-nav ms-auto p-4 p-lg-0">
