@@ -4,7 +4,7 @@
       <el-col :span="17">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入任务函数名、函数功能描述搜索" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入任務函數名、函數功能描述搜索" />
           </el-form-item>
           <el-form-item>
             <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
@@ -12,15 +12,15 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','system-jobs-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createJob()">新增</el-button>
-        <el-button type="info" icon="el-icon-notebook-1" size="medium" @click="showFunctionsDialog()">函数清单</el-button>
-        <el-button v-permission="['admin','system-jobs-clear']" type="danger" icon="el-icon-delete" size="medium" @click="deleteJobs()">清除任务</el-button>
+        <el-button type="info" icon="el-icon-notebook-1" size="medium" @click="showFunctionsDialog()">函數清單</el-button>
+        <el-button v-permission="['admin','system-jobs-clear']" type="danger" icon="el-icon-delete" size="medium" @click="deleteJobs()">清除任務</el-button>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>任务调度</span>
+            <span>任務調度</span>
           </div>
           <el-table
             ref="multipleTable"
@@ -29,12 +29,12 @@
           >
             <el-table-column
               type="index"
-              label="序号"
+              label="序號"
               width="50"
             />
             <el-table-column
               prop="name"
-              label="函数名称"
+              label="函數名稱"
               show-overflow-tooltip
             />
             <el-table-column
@@ -44,21 +44,21 @@
             />
             <el-table-column
               prop="next_run_time"
-              label="下次执行时间"
+              label="下次執行時間"
             />
             <el-table-column
-              label="任务状态"
+              label="任務狀態"
               min-width="60"
               show-overflow-tooltip
             >
               <template slot-scope="{row}">
-                <el-tag v-if="row.next_run_time" type="success">已运行</el-tag>
-                <el-tag v-else type="warning">已暂停</el-tag>
+                <el-tag v-if="row.next_run_time" type="success">已運行</el-tag>
+                <el-tag v-else type="warning">已暫停</el-tag>
               </template>
             </el-table-column>
             <el-table-column
               prop="cron"
-              label="Cron表达式"
+              label="Cron表達式"
             />
             <el-table-column
               fixed="right"
@@ -67,7 +67,7 @@
               width="150"
             >
               <template slot-scope="{row}">
-                <el-tooltip content="历史" placement="top">
+                <el-tooltip content="歷史" placement="top">
                   <el-button v-permission="['admin','system-jobs-history']" type="info" icon="el-icon-message" size="mini" circle @click="executionDialog(row)" />
                 </el-tooltip>
                 <el-button v-if="row.next_run_time" v-permission="['admin','system-jobs-ps']" type="warning" icon="el-icon-video-pause" size="mini" circle @click="updateJob(row,'false')" />
@@ -76,7 +76,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <!--分页组件-->
+          <!--分頁組件-->
           <el-pagination
             :current-page="1"
             :page-sizes="[10, 20, 50, 100]"
@@ -111,12 +111,12 @@ export default {
       },
       tableData: [],
       total: 0,
-      // cuForm数据
+      // cuForm數據
       cuDialogVisible: false,
-      // executionDialog数据
+      // executionDialog數據
       executionDialogVisible: false,
       jobID: '',
-      // functionDialog数据
+      // functionDialog數據
       functionDialogVisible: false
     }
   },
@@ -124,7 +124,7 @@ export default {
     this.search()
   },
   methods: {
-    // 获取调度任务列表/搜索功能
+    // 獲取調度任務列表/搜索功能
     search() {
       getJobs(this.form).then(res => {
         this.tableData = res.data.results
@@ -136,16 +136,16 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // 删除调度任务
+    // 刪除調度任務
     deleteJob(row) {
-      this.$confirm('此操作将删除该调度任务, 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除該調度任務, 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteJob(row.id).then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -153,16 +153,16 @@ export default {
         })
       })
     },
-    // 删除所有调度任务
+    // 刪除所有調度任務
     deleteJobs() {
-      this.$confirm('此操作将删除所有调度任务, 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除所有調度任務, 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteJobs().then(res => {
           this.$message({
-            message: '删除成功',
+            message: '刪除成功',
             type: 'success'
           })
           // 刷新table
@@ -170,18 +170,18 @@ export default {
         })
       })
     },
-    // 启动/暂停调度任务
+    // 啟動/暫停調度任務
     updateJob(row, status) {
       updateJob(row.id, { 'status': status }).then(res => {
         this.$message({
-          message: status === 'true' ? '启动成功' : '暂停成功',
+          message: status === 'true' ? '啟動成功' : '暫停成功',
           type: 'success'
         })
         // 刷新table
         this.search()
       })
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()
@@ -190,7 +190,7 @@ export default {
       this.form.page = val
       this.search()
     },
-    // cuForm子组件
+    // cuForm子組件
     createJob() {
       this.cuDialogVisible = true
     },

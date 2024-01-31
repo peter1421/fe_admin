@@ -18,7 +18,7 @@
             data-wow-delay="0.1s"
           >
             <div class="course-item bg-light">
-              <!-- ... 其他代码 ... -->
+              <!-- ... 其他代碼 ... -->
               <div class="position-relative overflow-hidden">
                 <img class="img-fluid" :src="require('@/assets/img/course-2.jpg')" alt="">
                 <div
@@ -54,7 +54,7 @@
                   ><i class="fa fa-user text-primary me-2" />{{ book.author }}</small>
                 </div>
               </div>
-            <!-- ... 其他代码 ... -->
+            <!-- ... 其他代碼 ... -->
             </div>
           </div>
         </div>
@@ -101,18 +101,18 @@ export default {
   },
   methods: {
     checkPermission,
-    // 获取部门Tree结构
-    // 部门Tree过滤方法
+    // 獲取部門Tree結構
+    // 部門Tree過濾方法
     filterNode(value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    // 过滤部门下的用户列表
+    // 過濾部門下的用戶列表
     handleNodeClick(data) {
       this.form.department_id = data.id
       this.search()
     },
-    // 获取書籍列表/搜索功能
+    // 獲取書籍列表/搜索功能
     search() {
       getBooks(this.form).then(res => {
         this.tableData = res.data.results
@@ -123,7 +123,7 @@ export default {
     // 重置
     resetForm() {
       this.$refs.form.resetFields()
-      // form中未使用department_id字段需手动清除
+      // form中未使用department_id字段需手動清除
       this.form.department_id = ''
       this.search()
     },

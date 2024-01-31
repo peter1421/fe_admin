@@ -1,13 +1,13 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" title="新增调度任务" width="700px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" title="新增調度任務" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left" :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="函数名称" prop="name">
+      <el-form-item label="函數名稱" prop="name">
         <el-select
           v-model="ruleForm.name"
           clearable
           filterable
           remote
-          placeholder="请输入调度函数名称或功能描述"
+          placeholder="請輸入調度函數名稱或功能描述"
           :remote-method="getJobFunction"
           :loading="loading"
         >
@@ -24,7 +24,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="Cron表达式" prop="cron">
+      <el-form-item label="Cron表達式" prop="cron">
         <el-input v-model="ruleForm.cron" clearable autocomplete="off" />
       </el-form-item>
       <el-form-item>
@@ -58,8 +58,8 @@ export default {
       functionOptions: {},
       loading: false,
       rules: {
-        name: [{ required: true, trigger: 'blur', message: '函数名不能为空' }],
-        cron: [{ required: true, trigger: 'blur', message: 'Cron表达式不能为空' }]
+        name: [{ required: true, trigger: 'blur', message: '函數名不能為空' }],
+        cron: [{ required: true, trigger: 'blur', message: 'Cron表達式不能為空' }]
       }
     }
   },
@@ -72,7 +72,7 @@ export default {
       this.close()
       this.$emit('search')
     },
-    // 获取调度函数列表
+    // 獲取調度函數列表
     getJobFunction(query) {
       if (query !== '') {
         this.loading = true
@@ -84,7 +84,7 @@ export default {
         this.functionOptions = []
       }
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

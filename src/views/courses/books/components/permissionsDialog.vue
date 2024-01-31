@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="permissionsDialogVisible" title="权限列表" width="700px" :before-close="close">
+  <el-dialog :visible.sync="permissionsDialogVisible" title="權限列表" width="700px" :before-close="close">
     <el-tree
       ref="permissions"
       :data="permissionsData"
@@ -56,7 +56,7 @@ export default {
       this.permissionsData = []
       this.$emit('permissionsClose')
     },
-    // 更改Permissions Tree的disabled属性
+    // 更改Permissions Tree的disabled屬性
     changeDisabled(data, disabled) {
       for (let index = 0; index < data.length; index++) {
         const children = data[index].children

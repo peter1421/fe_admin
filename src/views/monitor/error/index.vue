@@ -4,7 +4,7 @@
       <el-col>
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入内容搜索" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入內容搜索" />
           </el-form-item>
           <el-form-item>
             <el-button type="success" icon="el-icon-search" size="medium" @click="search(form)">搜索</el-button>
@@ -23,7 +23,7 @@
           />
           <el-table-column
             prop="username"
-            label="用户名"
+            label="用戶名"
           />
           <el-table-column
             prop="ip"
@@ -32,7 +32,7 @@
           />
           <el-table-column
             prop="view"
-            label="视图"
+            label="視圖"
           />
           <el-table-column
             prop="desc"
@@ -41,7 +41,7 @@
           />
           <el-table-column
             prop="create_time"
-            label="错误时间"
+            label="錯誤時間"
             width="180"
           />
           <el-table-column
@@ -51,11 +51,11 @@
             width="220"
           >
             <template slot-scope="{row}">
-              <el-button type="text" size="mini" @click="dialogVisible(row)">错误详情</el-button>
+              <el-button type="text" size="mini" @click="dialogVisible(row)">錯誤詳情</el-button>
             </template>
           </el-table-column>
         </el-table>
-        <!--分页组件-->
+        <!--分頁組件-->
         <el-pagination
           :current-page="1"
           :page-sizes="[10, 20, 50, 100]"
@@ -67,7 +67,7 @@
         />
       </el-col>
     </el-row>
-    <el-dialog title="错误详情" :visible.sync="dialogTableVisible">
+    <el-dialog title="錯誤詳情" :visible.sync="dialogTableVisible">
       <pre class="errorPre">{{ errorDetails }}</pre>
     </el-dialog>
   </div>
@@ -94,7 +94,7 @@ export default {
     this.search()
   },
   methods: {
-    // 获取错误日志列表/搜索功能
+    // 獲取錯誤日志列表/搜索功能
     search() {
       getErrorLogs(this.form).then(res => {
         this.tableData = res.data.results
@@ -106,10 +106,10 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // 清空错误日志
+    // 清空錯誤日志
     deleteLogs() {
-      this.$confirm('此操作将清空所有错误日志信息 , 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將清空所有錯誤日志信息 , 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
@@ -122,12 +122,12 @@ export default {
         })
       })
     },
-    // 错误详情dialog显示
+    // 錯誤詳情dialog顯示
     dialogVisible(row) {
       this.errorDetails = row.detail
       this.dialogTableVisible = true
     },
-    // 分页
+    // 分頁
     handleSizeChange(val) {
       this.form.size = val
       this.search()

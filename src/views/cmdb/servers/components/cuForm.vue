@@ -1,18 +1,18 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :title="curId ? '编辑服务器' : '新增服务器'" width="720px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯服務器' : '新增服務器'" width="720px" :before-close="close">
     <el-form ref="ruleForm" inline label-position="left" :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-card shadow="never">
-        <el-form-item label="服务器名称" prop="name">
+        <el-form-item label="服務器名稱" prop="name">
           <el-input v-model="ruleForm.name" clearable />
         </el-form-item>
-        <el-form-item label="设备编号" prop="sn">
+        <el-form-item label="設備編號" prop="sn">
           <el-input v-model="ruleForm.sn" clearable />
         </el-form-item>
         <el-form-item label="IP" prop="manage_ip">
           <el-input v-model="ruleForm.manage_ip" clearable />
         </el-form-item>
-        <el-form-item label="服务器状态" prop="asset_status">
-          <el-select v-model="ruleForm.asset_status" clearable placeholder="选择服务器状态">
+        <el-form-item label="服務器狀態" prop="asset_status">
+          <el-select v-model="ruleForm.asset_status" clearable placeholder="選擇服務器狀態">
             <el-option
               v-for="item in statusOptions"
               :key="item.value"
@@ -21,13 +21,13 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="管理员" prop="admin">
+        <el-form-item label="管理員" prop="admin">
           <el-select
             v-model="ruleForm.admin"
             clearable
             filterable
             remote
-            placeholder="请输入用户名"
+            placeholder="請輸入用戶名"
             :remote-method="getAssetsAdmin"
             :loading="loading"
           >
@@ -39,17 +39,17 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="到期时间" prop="expire_day">
+        <el-form-item label="到期時間" prop="expire_day">
           <el-date-picker
             v-model="ruleForm.expire_day"
             type="date"
-            placeholder="选择日期"
+            placeholder="選擇日期"
             :picker-options="pickerOptions"
             format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
           />
         </el-form-item>
-        <el-form-item label="所在机柜" prop="cabinet">
+        <el-form-item label="所在機櫃" prop="cabinet">
           <el-cascader
             v-model="ruleForm.cabinet"
             :options="cabinetOptions"
@@ -58,13 +58,13 @@
             @change="cabinetHandleChange"
           />
         </el-form-item>
-        <el-form-item label="备注" prop="memo">
+        <el-form-item label="備注" prop="memo">
           <el-input v-model="ruleForm.memo" clearable />
         </el-form-item>
       </el-card>
       <el-card shadow="never">
-        <el-form-item label="类型" prop="server.server_type">
-          <el-select v-model="ruleForm.server.server_type" clearable placeholder="选择服务器类型">
+        <el-form-item label="類型" prop="server.server_type">
+          <el-select v-model="ruleForm.server.server_type" clearable placeholder="選擇服務器類型">
             <el-option
               v-for="item in serverTypeOptions"
               :key="item.value"
@@ -73,8 +73,8 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="系统类型" prop="server.server_system_type">
-          <el-select v-model="ruleForm.server.server_system_type" clearable placeholder="选择服务器系统类型">
+        <el-form-item label="系統類型" prop="server.server_system_type">
+          <el-select v-model="ruleForm.server.server_system_type" clearable placeholder="選擇服務器系統類型">
             <el-option
               v-for="item in serverSystemOptions"
               :key="item.value"
@@ -83,7 +83,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="系统版本" prop="server.model">
+        <el-form-item label="系統版本" prop="server.model">
           <el-input v-model="ruleForm.server.model" clearable />
         </el-form-item>
         <el-form-item label="用途" prop="server.use">
@@ -93,19 +93,19 @@
       <el-card shadow="never">
         <div v-for="(account, index) in ruleForm.server.accounts" :key="index">
           <el-form-item
-            label="用户名"
+            label="用戶名"
             :prop="'server.' + 'accounts.' + index + '.username'"
             :rules="{
-              required: true, message: '用户名不能为空', trigger: 'blur'
+              required: true, message: '用戶名不能為空', trigger: 'blur'
             }"
           >
             <el-input v-model="account.username" clearable />
           </el-form-item>
           <el-form-item
-            label="密码"
+            label="密碼"
             :prop="'server.' + 'accounts.' + index + '.password'"
             :rules="{
-              required: true, message: '密码不能为空', trigger: 'blur'
+              required: true, message: '密碼不能為空', trigger: 'blur'
             }"
           >
             <el-input v-model="account.password" clearable />
@@ -114,14 +114,14 @@
             label="端口"
             :prop="'server.' + 'accounts.' + index + '.port'"
             :rules="{
-              required: true, message: '端口不能为空', trigger: 'blur'
+              required: true, message: '端口不能為空', trigger: 'blur'
             }"
           >
             <el-input v-model="account.port" clearable />
           </el-form-item>
-          <el-button @click.prevent="removeAccount(account)">删除</el-button>
+          <el-button @click.prevent="removeAccount(account)">刪除</el-button>
         </div>
-        <el-button @click="addAccount">新增账户</el-button>
+        <el-button @click="addAccount">新增賬戶</el-button>
       </el-card>
       <el-form-item class="el-sub-button">
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -183,15 +183,15 @@ export default {
       },
       cabinetOptions: [],
       rules: {
-        name: [{ required: true, trigger: 'blur', message: '服务器名不能为空' }],
-        sn: [{ required: true, trigger: 'blur', message: '设备标号不能为空' }],
+        name: [{ required: true, trigger: 'blur', message: '服務器名不能為空' }],
+        sn: [{ required: true, trigger: 'blur', message: '設備標號不能為空' }],
         manage_ip: [
-          { required: true, trigger: 'blur', message: 'Ip不能为空' },
+          { required: true, trigger: 'blur', message: 'Ip不能為空' },
           { validator: validateIP, trigger: 'blur' }
         ],
-        asset_status: [{ required: true, trigger: 'blur', message: '服务器状态不能为空' }],
-        'server.server_type': [{ required: true, trigger: 'blur', message: '类型不能为空' }],
-        'server.server_system_type': [{ required: true, trigger: 'blur', message: '系统类型不能为空' }]
+        asset_status: [{ required: true, trigger: 'blur', message: '服務器狀態不能為空' }],
+        'server.server_type': [{ required: true, trigger: 'blur', message: '類型不能為空' }],
+        'server.server_system_type': [{ required: true, trigger: 'blur', message: '系統類型不能為空' }]
       }
     }
   },
@@ -222,25 +222,25 @@ export default {
       this.close()
       this.$emit('search')
     },
-    // 获取服务器系统类型列表
+    // 獲取服務器系統類型列表
     getServerSystemType() {
       getServerSystemType().then(res => {
         this.serverSystemOptions = res.data.results
       })
     },
-    // 获取服务器类型列表
+    // 獲取服務器類型列表
     getServerType() {
       getServerType().then(res => {
         this.serverTypeOptions = res.data.results
       })
     },
-    // 获取机房机柜Tree结构数据
+    // 獲取機房機櫃Tree結構數據
     getIDCCabinetsTree() {
       getIDCCabinetsTree().then(res => {
         this.cabinetOptions = res.data.results
       })
     },
-    // 机房机柜级联选择器的change
+    // 機房機櫃級聯選擇器的change
     cabinetHandleChange(value) {
       if (value.length > 0) {
         this.ruleForm.cabinet = value[value.length - 1]
@@ -248,7 +248,7 @@ export default {
         this.ruleForm.cabinet = null
       }
     },
-    // 查找服务器管理员
+    // 查找服務器管理員
     getAssetsAdmin(query) {
       if (query !== '') {
         this.loading = true
@@ -273,7 +273,7 @@ export default {
         port: ''
       })
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

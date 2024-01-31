@@ -129,7 +129,7 @@ export default {
         this.bookForm.publish_date = formattedDate
       }
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.saveBook()
       this.$refs[formName].validate((valid) => {

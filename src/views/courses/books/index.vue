@@ -4,7 +4,7 @@
       <el-col :span="24">
         <el-form ref="form" :model="form" inline>
           <el-form-item prop="search">
-            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="输入學生名稱、手機號碼、電子郵件搜尋" />
+            <el-input v-model="form.search" clearable style="width:300px" prefix-icon="el-icon-search" placeholder="輸入學生名稱、手機號碼、電子郵件搜尋" />
           </el-form-item>
           <el-form-item prop="is_active">
             <el-select v-model="form.is_active" style="width:100px" clearable placeholder="狀態">
@@ -18,7 +18,7 @@
           </el-form-item>
         </el-form>
         <el-button v-permission="['admin','system-users-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="addBook()">新增書籍</el-button>
-        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteBooks(form)">删除</el-button>
+        <el-button v-permission="['admin','system-users-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteBooks(form)">刪除</el-button>
         <el-table
           ref="multipleTable"
           :data="tableData"
@@ -75,7 +75,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <!--分页组件-->
+        <!--分頁組件-->
         <el-pagination
           :current-page="1"
           :page-sizes="[10, 20, 50, 100]"
@@ -117,22 +117,22 @@ export default {
       },
       tableData: [],
       total: 0,
-      multipleSelection: [], // 已选择的用户id数组
+      multipleSelection: [], // 已選擇的用戶id數組
       filterText: '',
       departmentsData: [],
       defaultProps: {
         children: 'children',
         label: 'label'
       },
-      // 以下为cuForm子组件数据
+      // 以下為cuForm子組件數據
       cuDialogVisible: false,
       curId: null,
-      // 以下为resetPwdForm子组件数据
+      // 以下為resetPwdForm子組件數據
       resetPassDialogVisible: false,
-      // permissionsDialog子组件
+      // permissionsDialog子組件
       permissionsDialogVisible: false,
 
-      // book子组件
+      // book子組件
       bookDialogVisible: false,
       book_id: null
 
@@ -153,18 +153,18 @@ export default {
   },
   methods: {
     checkPermission,
-    // 获取部门Tree结构
-    // 部门Tree过滤方法
+    // 獲取部門Tree結構
+    // 部門Tree過濾方法
     filterNode(value, data) {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     },
-    // 过滤部门下的用户列表
+    // 過濾部門下的用戶列表
     handleNodeClick(data) {
       this.form.department_id = data.id
       this.search()
     },
-    // 获取書籍列表/搜索功能
+    // 獲取書籍列表/搜索功能
     search() {
       getBooks(this.form).then(res => {
         this.tableData = res.data.results
@@ -175,12 +175,12 @@ export default {
     // 重置
     resetForm() {
       this.$refs.form.resetFields()
-      // form中未使用department_id字段需手动清除
+      // form中未使用department_id字段需手動清除
       this.form.department_id = ''
       this.search()
     },
 
-    // 删除書籍
+    // 刪除書籍
     deleteBook(row) {
       this.$confirm('此動作將刪除書籍: "' + row.name + '" , 是否繼續?', '提示', {
         confirmButtonText: '確定',
@@ -189,7 +189,7 @@ export default {
       }).then(() => {
         deleteBook(row.book_id).then(res => {
           this.$message({
-            message: '删除書籍' + row.name + '成功',
+            message: '刪除書籍' + row.name + '成功',
             type: 'success'
           })
           // 刷新table
@@ -198,14 +198,14 @@ export default {
       })
     },
 
-    // table选择功能的change事件
+    // table選擇功能的change事件
     handleSelectionChange() {
       const deleteIds = []
       this.$refs.multipleTable.selection.forEach(data => deleteIds.push(data.book_id))
       this.multipleSelection = deleteIds
     },
 
-    // 大量删除書籍
+    // 大量刪除書籍
     deleteBooks() {
       this.$confirm('此動作將刪除書籍' + ', 是否繼續?', '提示', {
         confirmButtonText: '確定',
@@ -214,7 +214,7 @@ export default {
       }).then(() => {
         deleteBooks(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除書籍成功',
+            message: '刪除書籍成功',
             type: 'success'
           })
           // 刷新table
@@ -235,7 +235,7 @@ export default {
     addBook() {
       this.bookDialogVisible = true
     },
-    // cuForm子组件
+    // cuForm子組件
     createUser() {
       this.cuDialogVisible = true
     },
@@ -253,7 +253,7 @@ export default {
       this.curId = null
       this.book_id = null
     },
-    // 重置密码子组件
+    // 重置密碼子組件
     resetPass(row) {
       this.resetPassDialogVisible = true
       this.curId = row.id
@@ -262,7 +262,7 @@ export default {
       this.resetPassDialogVisible = false
       this.curId = null
     },
-    // 用户权限组件
+    // 用戶權限組件
     userPermissions(row) {
       this.permissionsDialogVisible = true
       this.curId = row.id

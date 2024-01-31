@@ -10,7 +10,7 @@
       </el-form-item>
     </el-form>
     <el-button v-permission="['admin','system-departments-add']" type="primary" style="margin-bottom:20px" icon="el-icon-plus" size="medium" @click="createDepartment()">新增</el-button>
-    <el-button v-permission="['admin','system-departments-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteDepartments(form)">删除</el-button>
+    <el-button v-permission="['admin','system-departments-mdel']" type="danger" icon="el-icon-delete" :disabled="multipleSelection.length ? false : true" size="medium" @click="deleteDepartments(form)">刪除</el-button>
     <el-table
       ref="table"
       :data="tableData"
@@ -41,7 +41,7 @@
       >
         <template slot-scope="{row}">
           <el-button v-permission="['admin','system-departments-update']" type="primary" icon="el-icon-edit" size="mini" @click="updateDepartment(row)">編輯</el-button>
-          <el-button v-permission="['admin','system-departments-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteDepartment(row)">删除</el-button>
+          <el-button v-permission="['admin','system-departments-del']" type="danger" icon="el-icon-delete" size="mini" @click="deleteDepartment(row)">刪除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -63,7 +63,7 @@ export default {
       tableData: [],
       isAllSelect: false,
       multipleSelection: [],
-      // cuForm数据
+      // cuForm數據
       cuDialogVisible: false,
       curId: null
     }
@@ -72,7 +72,7 @@ export default {
     this.search()
   },
   methods: {
-    // 获取部门Tree列表/搜索功能
+    // 獲取部門Tree列表/搜索功能
     search() {
       getDepartments(this.form).then(res => {
         this.tableData = res.data.results
@@ -83,7 +83,7 @@ export default {
       this.$refs.form.resetFields()
       this.search()
     },
-    // 删除部门
+    // 刪除部門
     deleteDepartment(row) {
       this.$confirm('此動作將刪除班級 "' + row.name + '" 及其群組' + ' , 是否繼續？', '提醒', {
         confirmButtonText: '確定',
@@ -92,7 +92,7 @@ export default {
       }).then(() => {
         deleteDepartment(row.id).then(res => {
           this.$message({
-            message: '删除班級' + row.name + '成功',
+            message: '刪除班級' + row.name + '成功',
             type: 'success'
           })
           // 刷新table
@@ -100,16 +100,16 @@ export default {
         })
       })
     },
-    // 批量删除部门
+    // 批量刪除部門
     deleteDepartments() {
-      this.$confirm('此操作将删除选中部门及其子部门' + ', 是否继续？', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('此操作將刪除選中部門及其子部門' + ', 是否繼續？', '提示', {
+        confirmButtonText: '確定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         deleteDepartments(this.multipleSelection).then(res => {
           this.$message({
-            message: '删除部门成功',
+            message: '刪除部門成功',
             type: 'success'
           })
           // 刷新table
@@ -117,9 +117,9 @@ export default {
         })
       })
     },
-    // table全选事件
+    // table全選事件
     selectAllChange(selection) {
-      // 如果选中的数目与请求到的数目相同就选中所有子节点，否则就清空
+      // 如果選中的數目與請求到的數目相同就選中所有子節點，否則就清空
       console.log(selection)
       if (selection && selection.length === this.tableData.length && selection[0].id === this.tableData[0].id) {
         selection.forEach(val => {
@@ -129,9 +129,9 @@ export default {
         this.$refs.table.clearSelection()
       }
     },
-    // 选项框点击事件
+    // 選項框點擊事件
     selectChange(selection, row) {
-      // 如果selection中存在row代表是选中，否则是取消选中
+      // 如果selection中存在row代表是選中，否則是取消選中
       if (selection.indexOf(row) !== -1) {
         if (row.children) {
           row.children.forEach(val => {
@@ -144,7 +144,7 @@ export default {
         this.reverseRowSelection(selection, row)
       }
     },
-    // 取消选择
+    // 取消選擇
     reverseRowSelection(selection, data) {
       if (data.children) {
         data.children.forEach(val => {
@@ -155,13 +155,13 @@ export default {
         })
       }
     },
-    // 选项改变时触发
+    // 選項改變時觸發
     handleSelectionChange(val) {
       const deleteIds = []
       this.$refs.table.selection.forEach(data => deleteIds.push(data.id))
       this.multipleSelection = deleteIds
     },
-    // cuForm子组件
+    // cuForm子組件
     createDepartment() {
       this.cuDialogVisible = true
     },

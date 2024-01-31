@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible" :title="curId ? '编辑IP黑名单' : '新增IP黑名单'" width="700px" :before-close="close">
+  <el-dialog :visible.sync="dialogVisible" :title="curId ? '編輯IP黑名單' : '新增IP黑名單'" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-form-item label="IP" prop="ip">
         <el-input v-model="ruleForm.ip" clearable autocomplete="off" />
@@ -32,7 +32,7 @@ export default {
         ip: ''
       },
       rules: {
-        ip: [{ required: true, trigger: 'blur', message: 'IP不能为空' }]
+        ip: [{ required: true, trigger: 'blur', message: 'IP不能為空' }]
       }
     }
   },
@@ -56,7 +56,7 @@ export default {
       this.close()
       this.$emit('search')
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

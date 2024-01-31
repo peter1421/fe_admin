@@ -1,13 +1,13 @@
 <template>
-  <el-dialog :close-on-click-modal="false" :visible.sync="dialogVisible" :title="curId ? '编辑权限' : '新增权限'" width="700px" :before-close="close">
+  <el-dialog :close-on-click-modal="false" :visible.sync="dialogVisible" :title="curId ? '編輯權限' : '新增權限'" width="700px" :before-close="close">
     <el-form ref="ruleForm" label-position="left  " :model="ruleForm" status-icon :rules="rules" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="权限名" prop="name">
+      <el-form-item label="權限名" prop="name">
         <el-input v-model="ruleForm.name" clearable />
       </el-form-item>
-      <el-form-item label="权限标识" prop="sign">
+      <el-form-item label="權限標識" prop="sign">
         <el-input v-model="ruleForm.sign" clearable />
       </el-form-item>
-      <el-form-item label="是否为菜单" prop="menu">
+      <el-form-item label="是否為菜單" prop="menu">
         <el-switch
           v-model="ruleForm.menu"
           active-text="是"
@@ -15,8 +15,8 @@
         />
       </el-form-item>
       <template v-if="ruleForm.menu===false">
-        <el-form-item label="请求方法" prop="method">
-          <el-select v-model="ruleForm.method" clearable placeholder="选择请求方法">
+        <el-form-item label="請求方法" prop="method">
+          <el-select v-model="ruleForm.method" clearable placeholder="選擇請求方法">
             <el-option
               v-for="item in permissionMethods"
               :key="item.value"
@@ -25,16 +25,16 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="请求路径" prop="path">
+        <el-form-item label="請求路徑" prop="path">
           <el-input v-model="ruleForm.path" clearable />
         </el-form-item>
       </template>
-      <el-form-item label="父权限" prop="pid">
+      <el-form-item label="父權限" prop="pid">
         <treeselect
           v-model="ruleForm.pid"
           :options="permissions"
           style="width: 178px"
-          placeholder="选择父权限"
+          placeholder="選擇父權限"
         />
       </el-form-item>
       <el-form-item label="描述" prop="desc">
@@ -84,11 +84,11 @@ export default {
       },
       permissionMethods: [],
       rules: {
-        name: [{ required: true, trigger: 'blur', message: '权限名不能为空' }],
-        sign: [{ required: true, trigger: 'blur', message: '权限标识不能为空' }],
-        menu: [{ required: true, trigger: 'blur', message: '是否为菜单不能为空' }],
-        method: [{ required: true, trigger: 'blur', message: '请求方法不能为空' }],
-        path: [{ required: true, trigger: 'blur', message: '请求路径不能为空' }]
+        name: [{ required: true, trigger: 'blur', message: '權限名不能為空' }],
+        sign: [{ required: true, trigger: 'blur', message: '權限標識不能為空' }],
+        menu: [{ required: true, trigger: 'blur', message: '是否為菜單不能為空' }],
+        method: [{ required: true, trigger: 'blur', message: '請求方法不能為空' }],
+        path: [{ required: true, trigger: 'blur', message: '請求路徑不能為空' }]
       }
     }
   },
@@ -100,7 +100,7 @@ export default {
             this.ruleForm = res.data
           })
         }
-        // 获取请求方法
+        // 獲取請求方法
         this.getMethod()
       }
     }
@@ -121,7 +121,7 @@ export default {
         this.permissionMethods = res.data.results
       })
     },
-    // 提交表单
+    // 提交表單
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
