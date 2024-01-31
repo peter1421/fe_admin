@@ -24,7 +24,7 @@
               <li><div style="height: 100%"><svg-icon icon-class="login" /> 登錄帳號<div class="user-right">{{ username }}</div></div></li>
               <li><svg-icon icon-class="user1" /> 用戶姓名 <div class="user-right">{{ name }}</div></li>
               <li><svg-icon icon-class="dept" /> 年級 <div class="user-right"> {{ department }}</div></li>
-              <li><svg-icon icon-class="phone" /> 手機號碼 <div class="user-right">{{ mobile }}</div></li>
+              <li><svg-icon icon-class="phone" /> 暱稱 <div class="user-right">{{ mobile }}</div></li>
               <li><svg-icon icon-class="email" /> 信箱 <div class="user-right">{{ email }}</div></li>
               <li>
                 <svg-icon icon-class="anq" /> 安全設置
@@ -54,8 +54,8 @@
               </el-form-item>
               <el-form-item label="性別" prop="gender">
                 <el-select v-model="form.gender" placeholder="請選擇" style="width: 40%">
-                  <el-option label="男" value="male" />
-                  <el-option label="女" value="female" />
+                  <el-option label="男" value="男" />
+                  <el-option label="女" value="女" />
                 </el-select>
               </el-form-item>
               <el-form-item>
@@ -72,7 +72,7 @@
 <script>
 import myUpload from 'vue-image-crop-upload'
 import updatePass from './components/updatePass'
-import { validatePhone, validateEMail } from '@/utils/rulesValidate'
+import { validateEMail } from '@/utils/rulesValidate'
 import { changeInformation } from '@/api/information/centre'
 import { mapGetters } from 'vuex'
 import store from '@/store'
@@ -93,9 +93,6 @@ export default {
         ],
         email: [
           { validator: validateEMail, trigger: 'blur' }
-        ],
-        mobile: [
-          { validator: validatePhone, trigger: 'blur' }
         ]
       },
       updateAvatarApi: process.env.VUE_APP_BASE_API + '/information/change-avatar/'
@@ -115,6 +112,7 @@ export default {
   created() {
     this.form = { name: this.name, mobile: this.mobile, email: this.email, gender: this.gender }
     store.dispatch('user/getInfo').then(() => {})
+    console.log(this.form)
   },
   methods: {
     toggleShow() {

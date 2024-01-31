@@ -13,6 +13,12 @@
       <el-form-item label="信箱" prop="email">
         <el-input v-model="ruleForm.email" clearable autocomplete="off" />
       </el-form-item>
+      <el-form-item label="性別" prop="gender">
+        <el-select v-model="ruleForm.gender" placeholder="請選擇" style="width: 40%">
+          <el-option label="男" value="男" />
+          <el-option label="女" value="女" />
+        </el-select>
+      </el-form-item>
       <el-form-item label="班級" prop="department">
         <treeselect
           v-model="ruleForm.department"
@@ -71,6 +77,7 @@ export default {
         name: '',
         mobile: '',
         email: '',
+        gender: '',
         department: null,
         roles: null
       },

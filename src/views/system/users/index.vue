@@ -41,6 +41,11 @@
             type="selection"
             width="55"
           />
+
+          <el-table-column
+            prop="role_name"
+            label="身分"
+          />
           <el-table-column
             prop="username"
             label="用戶名"
@@ -62,6 +67,11 @@
           <el-table-column
             prop="department_name"
             label="班級"
+          />
+          <el-table-column
+            prop="gender"
+            label="性別"
+            width="180"
           />
           <el-table-column
             prop="date_joined"
@@ -129,6 +139,7 @@ import resetPwdForm from './components/resetPwdForm'
 import permissionsDialog from './components/permissionsDialog'
 import { getUsers, updateUserActive, deleteUser, deleteUsers } from '@/api/system/users'
 import { getDepartments } from '@/api/system/departments'
+import { getRoles } from '@/api/system/roles'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Users',
@@ -158,7 +169,8 @@ export default {
       // 以下為resetPwdForm子組件數據
       resetPassDialogVisible: false,
       // permissionsDialog子組件
-      permissionsDialogVisible: false
+      permissionsDialogVisible: false,
+      rolesData: []
     }
   },
   computed: {
@@ -172,6 +184,7 @@ export default {
     }
   },
   created() {
+    this.getRoles()
     this.search()
     this.getDepartments()
   },
@@ -198,6 +211,16 @@ export default {
       getUsers(this.form).then(res => {
         this.tableData = res.data.results
         this.total = res.data.count
+        // 遍历用户数据，修改 roles
+        this.change()
+      })
+    },
+    change() {
+      this.tableData.forEach(user => {
+        // 由于每个用户只有一个角色，可以直接通过 user.roles[0] 获取该角色ID
+        const roleId = user.roles[0] // 获取用户的角色ID
+        const role = this.rolesData.find(r => r.id === roleId) // 根据角色ID查找对应的角色对象
+        user.role_name = role ? role.name : `null` // 如果找到对应的角色，则将其名称分配给 role_name，否则显示角色ID的提示信息
       })
     },
     // 重置
@@ -308,6 +331,11 @@ export default {
     permissionsClose() {
       this.permissionsDialogVisible = false
       this.curId = null
+    },
+    getRoles() {
+      getRoles().then(res => {
+        this.rolesData = res.data.results
+      })
     }
   }
 
