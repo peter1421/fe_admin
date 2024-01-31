@@ -14,28 +14,28 @@
             <div class="row g-3">
               <div class="col-lg-4 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                 <a class="position-relative d-block overflow-hidden" href="#/client/books" style="height: 100%;"><!--使用此style不好，但先將就-->
-                  <img class="img-fluid" :src="require('@/assets/img/cat-1.jpg')" alt="" style="height: 100%;"> <!--會因照片造成區塊大小不一 可針對照片進行設定-->
+                  <img class="img-fluid" :src="require('@/assets/img/cat-1.png')" alt="" style="height: 100%;"> <!--會因照片造成區塊大小不一 可針對照片進行設定-->
                   <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px">
                     <h5 class="m-0">魚姊姊</h5>
-                    <small class="text-primary">兒童聊書機器人</small>
+                    <small class="text-primary">聊書機器人</small>
                   </div>
                 </a>
               </div>
               <div class="col-lg-4 col-md-12 wow zoomIn" data-wow-delay="0.3s">
                 <a class="position-relative d-block overflow-hidden" href="" style="height: 100%;">
-                  <img class="img-fluid" :src="require('@/assets/img/cat-2.jpg')" alt="" style="height: 100%;">
+                  <img class="img-fluid" :src="require('@/assets/img/cat-2.png')" alt="" style="height: 100%;">
                   <div
                     class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                     style="margin: 1px"
                   >
-                    <h5 class="m-0">書本大全</h5>
+                    <h5 class="m-0">視覺化課程</h5>
                     <small class="text-primary">0 Courses</small>
                   </div>
                 </a>
               </div>
               <div class="col-lg-4 col-md-12 wow zoomIn" data-wow-delay="0.5s">
                 <a class="position-relative d-block overflow-hidden" href="" style="height: 100%;">
-                  <img class="img-fluid" :src="require('@/assets/img/cat-3.jpg')" alt="" style="height: 100%;">
+                  <img class="img-fluid" :src="require('@/assets/img/cat-3.png')" alt="" style="height: 100%;">
 
                   <div
                     class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"

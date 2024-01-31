@@ -5,12 +5,12 @@
         系統DEMO
       </h3>
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="管理者帳號:admin">
+        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="帳號">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password" show-password type="password" auto-complete="off" placeholder="管理者密碼:123456" @keyup.enter.native="handleLogin">
+        <el-input v-model="loginForm.password" show-password type="password" auto-complete="off" placeholder="密碼" @keyup.enter.native="handleLogin">
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>

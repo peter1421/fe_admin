@@ -7,10 +7,10 @@
       <el-form-item label="姓名" prop="name">
         <el-input v-model="ruleForm.name" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="手機號碼" prop="mobile">
+      <el-form-item label="暱稱" prop="mobile">
         <el-input v-model="ruleForm.mobile" clearable autocomplete="off" />
       </el-form-item>
-      <el-form-item label="電子郵件" prop="email">
+      <el-form-item label="信箱" prop="email">
         <el-input v-model="ruleForm.email" clearable autocomplete="off" />
       </el-form-item>
       <el-form-item label="班級" prop="department">

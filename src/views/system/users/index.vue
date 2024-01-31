@@ -51,7 +51,7 @@
           />
           <el-table-column
             prop="mobile"
-            label="電話"
+            label="暱稱"
             width="180"
           />
           <el-table-column

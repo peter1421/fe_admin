@@ -45,17 +45,18 @@
             <el-form ref="form" :rules="rules" :model="form" label-width="80px">
               <el-form-item label="姓名" prop="name">
                 <el-input v-model="form.name" style="width: 40%" />
-                <span style="color: #C0C0C0;margin-left: 10px;">用戶真實姓名或暱稱</span>
               </el-form-item>
-              <el-form-item label="手機號" prop="mobile">
+              <el-form-item label="暱稱" prop="mobile">
                 <el-input v-model="form.mobile" style="width: 40%" />
-                <span style="color: #C0C0C0;margin-left: 10px;">手機號可用於登錄使用</span>
               </el-form-item>
-              <el-form-item label="郵箱" prop="email">
+              <el-form-item label="信箱" prop="email">
                 <el-input v-model="form.email" style="width: 40%" />
               </el-form-item>
               <el-form-item label="性別" prop="gender">
-                <el-input v-model="form.gender" style="width: 40%" />
+                <el-select v-model="form.gender" placeholder="請選擇" style="width: 40%">
+                  <el-option label="男" value="male" />
+                  <el-option label="女" value="female" />
+                </el-select>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')">保存配置</el-button>
