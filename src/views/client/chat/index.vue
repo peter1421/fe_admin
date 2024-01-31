@@ -10,7 +10,7 @@
                 <div class="row">
                   <div class="col-lg-6 chat-data-left scroller  mt-2 pl-3">
                     <div class="chat-sidebar-channel scroller mt-2 pl-3">
-                      <pre><code class="language-python line-numbers">{{ code }}</code></pre>
+                      <div class="language-python line-numbers" v-html="code" />
                     </div>
                   </div>
                   <div class="col-lg-6 chat-data p-0 chat-data-right">
@@ -126,6 +126,7 @@ import pandas as pd
           console.log(res.data)
           this.botData = res.data
           this.botId = res.data.bot_id
+          this.code = res.data?.book?.content?.replace(/\n/g, '<br>')
           this.$message({
             message: `機器人ID: ${this.botId} 學生ID: ${this.student} 書籍ID: ${this.book}`,
             type: 'success'
