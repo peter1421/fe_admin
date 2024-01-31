@@ -138,7 +138,7 @@ export const asyncRoutes = [
     name: 'system',
     meta: {
       permissions: ['admin', 'system'],
-      title: '系统管理',
+      title: '系統管理',
       icon: 'system'
     },
     children: [
@@ -170,7 +170,7 @@ export const asyncRoutes = [
         name: 'system-permissions',
         meta: {
           permissions: ['admin', 'system-permissions'],
-          title: '权限管理',
+          title: '權限管理',
           icon: 'permission',
           noCache: true
         }
@@ -181,7 +181,7 @@ export const asyncRoutes = [
         name: 'system-departments',
         meta: {
           permissions: ['admin', 'system-departments'],
-          title: '部门管理',
+          title: '班級管理',
           icon: 'dept',
           noCache: true
         }
@@ -192,7 +192,7 @@ export const asyncRoutes = [
         name: 'system-jobs',
         meta: {
           permissions: ['admin', 'system-jobs'],
-          title: '任务调度',
+          title: '任務調度',
           icon: 'task -2',
           noCache: true
         }
@@ -221,7 +221,7 @@ export const asyncRoutes = [
     name: 'monitor',
     meta: {
       permissions: ['admin', 'monitor'],
-      title: '系统监控',
+      title: '系统監控',
       icon: 'monitor'
     },
     children: [
@@ -231,7 +231,7 @@ export const asyncRoutes = [
         name: 'monitor-users',
         meta: {
           permissions: ['admin', 'monitor-users'],
-          title: '在线用户',
+          title: '線上用户',
           icon: 'Steve-Jobs',
           noCache: true
         }
@@ -242,7 +242,7 @@ export const asyncRoutes = [
         name: 'monitor-ip',
         meta: {
           permissions: ['admin', 'monitor-ip'],
-          title: 'IP黑名单',
+          title: 'IP黑名單',
           icon: 'ipvisits',
           noCache: true
         }
@@ -259,7 +259,7 @@ export const asyncRoutes = [
         name: 'monitor-error',
         meta: {
           permissions: ['admin', 'monitor-error'],
-          title: '错误日志',
+          title: '錯誤日誌',
           icon: 'error',
           noCache: true
         }
@@ -270,7 +270,7 @@ export const asyncRoutes = [
         name: 'monitor-service',
         meta: {
           permissions: ['admin', 'monitor-service'],
-          title: '服务监控',
+          title: '服務監控',
           icon: 'codeConsole',
           noCache: true
         }
@@ -287,7 +287,7 @@ export const asyncRoutes = [
     name: 'cmdb',
     meta: {
       permissions: ['admin', 'cmdb'],
-      title: '资产管理',
+      title: '資產管理',
       icon: 'resources'
     },
     children: [
@@ -297,7 +297,7 @@ export const asyncRoutes = [
         name: 'cmdb-servers',
         meta: {
           permissions: ['admin', 'cmdb-servers'],
-          title: '服务器',
+          title: '伺服器',
           icon: 'server',
           noCache: true
         }
