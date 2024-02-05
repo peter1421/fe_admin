@@ -5,7 +5,7 @@
         <div class="col-sm-12">
           <div class="iq-card">
             <div class="iq-card-body chat-page p-0">
-              <chat-header v-if="botData.student.name" :bot-data="botData" />
+              <chat-header v-if="botData.student.name" :bot-data="botData" /> <!-- 顯示機器人名稱,名子太長會讓頭像遮住字 (修改chatHeader)-->
               <div class="chat-data-block">
                 <div class="row">
                   <div class="col-lg-6 chat-data-left scroller  mt-2 pl-3">
