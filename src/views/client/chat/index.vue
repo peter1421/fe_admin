@@ -50,7 +50,7 @@ import 'prismjs/themes/prism.css' // 主題樣式
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css' // 行號樣式
 import { mapGetters } from 'vuex'
 import { getMessages, sendMessage } from '@/api/chatbot/message'
-import { getStudetnBookBot, creatStudentBookBot } from '@/api/chatbot/bookbot'
+import { getStudentBookBot, createStudentBookBot } from '@/api/chatbot/bookbot'
 import store from '@/store'
 // import { data } from 'vue-echarts'
 // import { data } from 'vue-echarts'
@@ -114,14 +114,14 @@ import pandas as pd
     init() {
       this.student = this.userId
       this.book = this.$route.params.bookId
-      this.getStudetnBookBot()
+      this.getStudentBookBot()
     },
-    getStudetnBookBot() {
+    getStudentBookBot() {
       const params = {
         student: this.student,
         book: this.book
       }
-      getStudetnBookBot(params)
+      getStudentBookBot(params)
         .then(res => {
           console.log(res.data)
           this.botData = res.data
@@ -138,17 +138,17 @@ import pandas as pd
             message: '獲取機器人失敗，正在為您創造新的機器人',
             type: 'warning'
           })
-          this.creatStudentBookBot()
+          this.createStudentBookBot()
         }).finally(() => {
           this.getMessages()
         })
     },
-    creatStudentBookBot() {
+    createStudentBookBot() {
       const data = {
         student: parseInt(this.student),
         book: parseInt(this.book)
       }
-      creatStudentBookBot(data)
+      createStudentBookBot(data)
         .then(res => {
           this.init()
         })
