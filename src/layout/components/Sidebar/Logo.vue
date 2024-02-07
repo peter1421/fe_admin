@@ -19,14 +19,6 @@
           <i class="fa fa-book" />eLEARNING
         </h4>
       </a>
-      <button
-        type="button"
-        class="navbar-toggler me-4"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
     </transition>
   </div>
 </template>
