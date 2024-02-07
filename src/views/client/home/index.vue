@@ -254,7 +254,9 @@ export default {
 
 }
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('#chat-form').onsubmit = function() {
+  const domForm = document.querySelector('#chat-form')
+  if (!domForm) return
+  domForm.onsubmit = function() {
     const messageInput = document.querySelector('#message-input')
     const message = messageInput.value.trim() // 使用 trim() 移除兩端空白字符
     messageInput.value = '' // 清空輸入框
