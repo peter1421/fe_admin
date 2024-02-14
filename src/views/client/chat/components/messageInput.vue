@@ -1,11 +1,14 @@
 <template>
   <div class="chat-footer p-3 bg-white">
     <form @submit.prevent="send">
-      <input v-model="newMessage" type="text" class="form-control mr-3" placeholder="Type your message">
-      <button type="submit" class="btn btn-primary d-flex align-items-center p-2">
+      <input v-model="newMessage" type="text" class="form-control" style="width: 80%;float: left;" placeholder="Type your message">
+      <button type="submit" class="btn btn-primary p-2" style="width: 20%;text-align: center;position: relative;top: -1px;">
         <span class="d-none d-lg-block ml-1">Send</span>
       </button>
     </form>
+    <button type="submit" class="btn btn-danger my-4 px-3 py-2" style="width: 100%;" @click="exit()">
+      <span class="d-none d-lg-block ml-1">離開此次對話</span>
+    </button>
   </div>
 </template>
 
@@ -37,6 +40,9 @@ export default {
       //   }
       // })
       this.newMessage = ''
+    },
+    exit() {
+      this.$emit('exitChat')
     }
   }
 }
