@@ -16,3 +16,11 @@ export function createStudentBookBot(data) {
     data
   })
 }
+
+export function updateStudentBookBot(data) {
+  return request({
+    url: `/chatbot/student-book-bot/`,
+    method: 'put',
+    data
+  })
+}
