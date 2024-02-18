@@ -20,7 +20,7 @@
             <div class="course-item bg-light">
               <!-- ... 其他代碼 ... -->
               <div class="position-relative overflow-hidden">
-                <img class="img-fluid" :src="require('@/assets/img/course-2.jpg')" alt="">
+                <img class="img-fluid" :src="require('@/assets/img/course-4.jpg')" alt="">
                 <div
                   class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4"
                 >
@@ -32,23 +32,12 @@
                 </div>
               </div>
               <div class="text-center p-4 pb-0">
-                <div style="height: 400px; display: flex; flex-direction: column;">
+                <div style="height: 200px; display: flex; flex-direction: column;">
                   <h3 class="mb-0" style="flex:0 1 auto">{{ book.name }}</h3>
                   <hr>
                   <div class="mb-3" style="flex: 1 1 auto;overflow: hidden;">
                     <p style="overflow: hidden; text-overflow: ellipsis; width: 100%;"> {{ book.description }}</p>
                   </div>
-                </div>
-                <div class="d-flex border-top">
-                  <small
-                    class="text-center border-end py-2 flex-grow-1"
-                  ><i class="fa fa-user-tie text-primary me-2" style="overflow: hidden;" />{{ book.difficulty }}</small>
-                  <small
-                    class="text-center border-end py-2 flex-grow-1"
-                  ><i class="fa fa-clock text-primary me-2" style="overflow: hidden;" />{{ book.category }}</small>
-                  <small
-                    class="text-center py-2 flex-grow-1"
-                  ><i class="fa fa-user text-primary me-2" style="overflow: hidden; text-overflow: ellipsis;" />{{ book.author }}</small>
                 </div>
               </div>
             <!-- ... 其他代碼 ... -->

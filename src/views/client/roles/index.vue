@@ -334,7 +334,7 @@ export default {
 .permissions-box-card{
   ::v-deep{
     .el-card__body{
-      max-height: 400px;
+      max-height: 200px;
       overflow-y: auto;
     }
   }
