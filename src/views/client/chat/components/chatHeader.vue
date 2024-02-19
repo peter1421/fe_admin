@@ -8,7 +8,7 @@
       <div class="avatar chat-user-profile m-0 mr-3">
         <img
           id="character"
-          :src="require('@/assets/img/chat/fish1.gif')"
+          :src="require('@/assets/img/cat-1.png')"
           alt="Character Image"
           class="avatar-130"
           style="text-align: center"
