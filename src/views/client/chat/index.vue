@@ -69,6 +69,7 @@ export default {
       student: null,
       book: null,
       newMessage: '',
+      now_chatroom_id: '',
       messages: [],
       botData: {},
       form: {
@@ -125,6 +126,7 @@ import pandas as pd
           console.log(res.data)
           this.botData = res.data
           this.botId = res.data.bot_id
+          this.now_chatroom_id = res.data.now_chatroom_id
           this.code = res.data?.book?.content?.replace(/\n/g, '<br>')
           this.$message({
             message: `機器人ID: ${this.botId} 學生ID: ${this.student} 書籍ID: ${this.book}`,
@@ -170,7 +172,7 @@ import pandas as pd
         'sender': 'user',
         'message': this.newMessage,
         'student_book_bot_id': this.botId,
-        'chatroom_id': 0
+        'chatroom_id': this.now_chatroom_id
       }
       const userMessage = { sender: messageLog.sender, text: messageLog.message }
       this.updateMessages(userMessage)
@@ -192,7 +194,6 @@ import pandas as pd
       }
       console.log('getMessages')
       getMessages(params).then((res) => {
-        // TODO:這裡有鬼 BJ4
         this.messages = []
         this.chatMessages = res.data
         // console.log(res)
