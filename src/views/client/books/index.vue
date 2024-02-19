@@ -64,7 +64,7 @@
 <script>
 import checkPermission from '@/utils/permission'
 import { getBooks } from '@/api/courses/books'
-import { creatStudentBookBot } from '@/api/chatbot/bookbot'
+import { createStudentBookBot } from '@/api/chatbot/bookbot'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Users',
@@ -131,7 +131,7 @@ export default {
         student: student,
         book: book
       }
-      creatStudentBookBot(data)
+      createStudentBookBot(data)
         .then(res => {
           this.$message({
             message: message + '成功',

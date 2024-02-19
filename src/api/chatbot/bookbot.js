@@ -1,7 +1,7 @@
 // 從 '@/utils/request' 導入 request 函數
 import request from '@/utils/request'
 
-export function getStudetnBookBot(params) {
+export function getStudentBookBot(params) {
   return request({
     url: `/chatbot/student-book-bot/`,
     method: 'get',
@@ -9,10 +9,18 @@ export function getStudetnBookBot(params) {
   })
 }
 
-export function creatStudentBookBot(data) {
+export function createStudentBookBot(data) {
   return request({
     url: `/chatbot/student-book-bot/`,
     method: 'post',
+    data
+  })
+}
+
+export function updateStudentBookBot(data) {
+  return request({
+    url: `/chatbot/student-book-bot/`,
+    method: 'put',
     data
   })
 }
