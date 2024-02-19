@@ -77,8 +77,7 @@ export default {
         ordering: 'id'
       },
       code: `
-import pandas as pd
-# 讀取 CSV 文件
+無資料
       `,
       tableData: [],
       isAllSelect: false,
@@ -127,20 +126,15 @@ import pandas as pd
           this.botData = res.data
           this.botId = res.data.bot_id
           this.now_chatroom_id = res.data.now_chatroom_id
-          this.code = res.data?.book?.content?.replace(/\n/g, '<br>')
+          this.code = res.data?.book?.description?.replace(/\n/g, '<br>')
           this.$message({
             message: `機器人ID: ${this.botId} 學生ID: ${this.student} 書籍ID: ${this.book}`,
             type: 'success'
           })
-
           this.getMessages()
         })
         .catch(error => {
-          console.error('獲取機器人失敗:', error)
-          this.$message({
-            message: '獲取機器人失敗，正在為您創造新的機器人',
-            type: 'warning'
-          })
+          console.log(error)
           this.createStudentBookBot()
         })
     },
