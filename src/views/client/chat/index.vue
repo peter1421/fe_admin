@@ -130,6 +130,8 @@ import pandas as pd
             message: `機器人ID: ${this.botId} 學生ID: ${this.student} 書籍ID: ${this.book}`,
             type: 'success'
           })
+
+          this.getMessages()
         })
         .catch(error => {
           console.error('獲取機器人失敗:', error)
@@ -138,8 +140,6 @@ import pandas as pd
             type: 'warning'
           })
           this.createStudentBookBot()
-        }).finally(() => {
-          this.getMessages()
         })
     },
     createStudentBookBot() {
