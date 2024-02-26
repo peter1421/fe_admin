@@ -474,7 +474,7 @@ span.avatar-status { position: absolute; bottom: -5px; top: auto; left: auto; ri
 .chat-data { background: url(../images/page-img/100.jpg) no-repeat scroll center center; background-size: cover; }
 .chat-header-icons .dropdown-toggle:empty::after { display: none; }
 .chat-header-icons > a > i, .chat-header-icons > span  > i { width: 40px; background: #e5f2ff; height: 40px; font-size: 20px; margin: 0 5px 0 0; color: #0084ff; display: inline-block; text-align: center; line-height: 40px; border-radius: 5px; cursor: pointer; }
-.chat-content { position: relative; height: calc(100vh - 17rem); text-align: center; padding: 1.4rem; overflow-y: scroll; overflow-x: hidden; }
+.chat-content { position: relative; height: calc(100vh - 17rem); text-align: center; padding: 1.4rem; overflow-y: scroll; overflow-x: hidden;margin-bottom: 15px; }
 .chat-user { float: right; text-align: center; }
 .chat-user span.chat-time { display: block; font-size: 12px; font-weight: 500; }
 .chat-detail { overflow: hidden; }

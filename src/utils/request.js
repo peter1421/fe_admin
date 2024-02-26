@@ -63,10 +63,10 @@ service.interceptors.response.use(
     }
     if (code === 401) {
       MessageBox.confirm(
-        '登录状态过期了哦，您可以继续留在该页面，或者重新登录',
+        '登入狀態過期了哦，您可以繼續留在該頁面，或重新登入',
         '系统提示',
         {
-          confirmButtonText: '重新登录',
+          confirmButtonText: '重新登入',
           cancelButtonText: '取消',
           type: 'warning'
         }
@@ -79,23 +79,23 @@ service.interceptors.response.use(
       router.push({ path: '/401' })
     } else if (code === 400) {
       Message({
-        message: errors || errorData || '服务端错误',
+        message: errors || errorData || '服務端錯誤',
         type: 'error',
         duration: 3 * 1000
       })
     } else if (code === 404) {
       Notification.error({
-        title: '错误',
+        title: '錯誤',
         message: '请求接口不存在!'
       })
     } else if (code === 502) {
       Notification.error({
-        title: '错误',
-        message: errors || errorData || '后端服务器连接失败!'
+        title: '錯誤',
+        message: errors || errorData || '後端伺服器連線失敗!'
       })
     } else if (code === 500) {
       Notification.error({
-        title: '错误',
+        title: '錯誤',
         message: errors || errorData || '服务端错误!'
       })
     } else {

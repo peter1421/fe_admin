@@ -6,7 +6,7 @@
         <span class="d-none d-lg-block ml-1">Send</span>
       </button>
     </form>
-    <button type="submit" class="btn btn-danger my-4 px-3 py-2" style="width: 100%;" @click="exit()">
+    <button type="button" class="btn btn-danger my-4 px-3 py-2" style="width: 100%;" @click="confirmExit()">
       <span class="d-none d-lg-block ml-1">離開此次對話</span>
     </button>
   </div>
@@ -40,6 +40,31 @@ export default {
       //   }
       // })
       this.newMessage = ''
+    },
+    exit() {
+      this.$emit('exitChat')
+    }
+  }
+}
+</script>
+
+<script>
+export default {
+  name: 'MessageInput',
+  data() {
+    return {
+      newMessage: ''
+    }
+  },
+  methods: {
+    send() {
+      this.$emit('sendMessage', this.newMessage)
+      this.newMessage = ''
+    },
+    confirmExit() {
+      if (confirm('確定要離開對話嗎？')) {
+        this.exit()
+      }
     },
     exit() {
       this.$emit('exitChat')
